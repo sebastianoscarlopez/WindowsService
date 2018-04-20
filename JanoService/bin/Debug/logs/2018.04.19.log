@@ -1,0 +1,27 @@
+2018-04-19 11:49:30,796 [8] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-19 11:49:30,826 [8] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-19 11:49:30,831 [8] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-19 11:49:31,292 [8] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description A .NET Windows Service.
+[Success] ServiceName JanoService
+2018-04-19 11:49:31,297 [8] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-19 11:49:31,432 [8] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-19 11:49:31,438 [8] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-19 11:49:31,442 [8] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
+2018-04-19 11:49:31,444 [8] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-19 11:52:49,095 [8] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-19 11:52:49,130 [8] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-19 11:52:49,136 [8] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-19 11:52:49,188 [8] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description Service 
+[Success] ServiceName JanoService
+2018-04-19 11:52:49,192 [8] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-19 11:52:49,282 [8] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-19 11:52:49,288 [8] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-19 11:52:49,291 [8] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
+2018-04-19 11:52:49,294 [8] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-19 11:53:41,072 [13] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - Control+C detected, attempting to stop service.
+2018-04-19 11:53:41,075 [13] TRACE JanoService.Service.WinService [(null)] - WinService Stop command received.
+2018-04-19 11:53:41,166 [8] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service has stopped.

@@ -1,0 +1,13 @@
+﻿Installing assembly 'C:\desarrollo\JanoService\JanoService\bin\Debug\JanoService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\desarrollo\JanoService\JanoService\bin\Debug\JanoService.InstallLog
+   assemblypath = C:\desarrollo\JanoService\JanoService\bin\Debug\JanoService.exe
+No public installers with the RunInstallerAttribute.Yes attribute could be found in the C:\desarrollo\JanoService\JanoService\bin\Debug\JanoService.exe assembly.
+Committing assembly 'C:\desarrollo\JanoService\JanoService\bin\Debug\JanoService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\desarrollo\JanoService\JanoService\bin\Debug\JanoService.InstallLog
+   assemblypath = C:\desarrollo\JanoService\JanoService\bin\Debug\JanoService.exe
+No public installers with the RunInstallerAttribute.Yes attribute could be found in the C:\desarrollo\JanoService\JanoService\bin\Debug\JanoService.exe assembly.
+Remove InstallState file because there are no installers.
