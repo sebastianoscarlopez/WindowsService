@@ -43,7 +43,7 @@ namespace JanoService.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00:10:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:05:00")]
         public global::System.TimeSpan TimeScheduled {
             get {
                 return ((global::System.TimeSpan)(this["TimeScheduled"]));

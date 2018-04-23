@@ -37,3 +37,204 @@
 2018-04-20 11:23:51,835 [9] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
 2018-04-20 11:23:51,842 [9] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
 2018-04-20 11:23:51,845 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-20 16:34:29,394 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:34:29,433 [10] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:34:29,441 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:34:29,492 [10] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:34:29,496 [10] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:34:29,600 [10] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:34:29,607 [10] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:35:08,879 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:35:08,918 [10] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:35:08,925 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:35:08,979 [10] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:35:08,983 [10] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:35:09,082 [10] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:35:09,088 [10] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:36:28,320 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:36:28,355 [10] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:36:28,361 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:36:28,410 [10] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:36:28,414 [10] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:36:28,515 [10] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:36:28,520 [10] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:37:02,705 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:37:02,741 [9] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:37:02,747 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:37:02,799 [9] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:37:02,804 [9] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:37:02,909 [9] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:37:02,915 [9] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:37:17,347 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:37:17,389 [10] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:37:17,398 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:37:17,449 [10] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:37:17,455 [10] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:37:17,563 [10] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:37:17,568 [10] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:44:46,773 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:44:46,806 [10] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:44:46,812 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:44:46,863 [10] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:44:46,869 [10] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:44:46,972 [10] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:44:46,978 [10] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:45:20,211 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:45:20,251 [10] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:45:20,258 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:45:20,310 [10] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:45:20,315 [10] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:45:20,424 [10] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:45:20,429 [10] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:46:31,645 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:46:31,680 [9] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:46:31,685 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:46:31,740 [9] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:46:31,745 [9] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:46:31,849 [9] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:46:31,854 [9] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:46:34,539 [9] ERROR Topshelf.Hosts.ConsoleRunHost [(null)] - An exception occurred
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at JanoService.Service.WinService.Start(HostControl hostControl) in C:\desarrollo\git\JanoService\JanoService\Service\WinService.cs:line 34
+   at JanoService.Program.<>c.<Main>b__0_2(WinService s, HostControl hostControl) in C:\desarrollo\git\JanoService\JanoService\Program.cs:line 137
+   at Topshelf.Builders.DelegateServiceBuilder`1.DelegateServiceHandle.Start(HostControl hostControl)
+   at Topshelf.Hosts.ConsoleRunHost.Run()
+2018-04-20 16:46:37,591 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:46:37,626 [10] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:46:37,632 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:46:37,681 [10] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:46:37,685 [10] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:46:37,780 [10] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:46:37,786 [10] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:47:08,386 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:47:08,440 [9] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:47:08,446 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:47:08,499 [9] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:47:08,503 [9] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:47:08,606 [9] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:47:08,611 [9] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:47:08,614 [9] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
+2018-04-20 16:47:08,616 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-20 16:47:11,275 [13] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - Control+C detected, attempting to stop service.
+2018-04-20 16:47:11,280 [13] TRACE JanoService.Service.WinService [(null)] - WinService Stop command received.
+2018-04-20 16:47:11,286 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service has stopped.
+2018-04-20 16:47:27,451 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:47:27,487 [10] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:47:27,493 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:47:27,543 [10] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:47:27,547 [10] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:47:27,651 [10] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:47:27,657 [10] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:47:27,660 [10] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
+2018-04-20 16:47:27,663 [10] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-20 16:47:28,787 [7] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - Control+C detected, attempting to stop service.
+2018-04-20 16:47:28,795 [7] TRACE JanoService.Service.WinService [(null)] - WinService Stop command received.
+2018-04-20 16:47:28,800 [10] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service has stopped.
+2018-04-20 16:48:17,631 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:48:17,667 [9] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:48:17,673 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:48:17,735 [9] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:48:17,739 [9] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:48:17,841 [9] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:48:17,846 [9] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:48:17,849 [9] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
+2018-04-20 16:48:17,852 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-20 16:48:21,691 [12] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - Control+C detected, attempting to stop service.
+2018-04-20 16:48:21,697 [12] TRACE JanoService.Service.WinService [(null)] - WinService Stop command received.
+2018-04-20 16:48:21,704 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service has stopped.
+2018-04-20 16:48:53,551 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:48:53,599 [9] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:48:53,606 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:48:53,662 [9] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:48:53,670 [9] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:48:53,782 [9] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:48:53,788 [9] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:48:53,791 [9] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
+2018-04-20 16:48:53,793 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-20 16:48:56,840 [12] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - Control+C detected, attempting to stop service.
+2018-04-20 16:48:56,845 [12] TRACE JanoService.Service.WinService [(null)] - WinService Stop command received.
+2018-04-20 16:48:56,852 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service has stopped.
+2018-04-20 16:57:26,761 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:57:26,801 [9] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:57:26,808 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:57:26,860 [9] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:57:26,864 [9] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:57:26,968 [9] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:57:26,974 [9] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:57:26,977 [9] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
+2018-04-20 16:57:26,979 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-20 16:57:29,290 [6] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - Control+C detected, attempting to stop service.
+2018-04-20 16:57:29,295 [6] TRACE JanoService.Service.WinService [(null)] - WinService Stop command received.
+2018-04-20 16:57:29,303 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service has stopped.
+2018-04-20 16:59:19,712 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 16:59:19,752 [10] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 16:59:19,759 [10] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 16:59:19,818 [10] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 16:59:19,822 [10] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 16:59:19,927 [10] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 16:59:19,932 [10] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 16:59:19,935 [10] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
+2018-04-20 16:59:19,937 [10] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-20 16:59:23,439 [6] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - Control+C detected, attempting to stop service.
+2018-04-20 16:59:23,445 [6] TRACE JanoService.Service.WinService [(null)] - WinService Stop command received.
+2018-04-20 16:59:23,452 [10] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service has stopped.
+2018-04-20 17:00:08,804 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Integration Started in host.
+2018-04-20 17:00:08,842 [9] DEBUG Topshelf.Ninject.HostConfiguratorExtensions [(null)] - Ninject kernel instantiated with 1 modules.
+2018-04-20 17:00:08,848 [9] INFO  Topshelf.Ninject.HostConfiguratorExtensions [(null)] - [Topshelf.Ninject] Service configured to construct using Ninject.
+2018-04-20 17:00:09,213 [9] INFO  Topshelf.HostFactory [(null)] - Configuration Result:
+[Success] Name JanoService
+[Success] Description JanoService add signs into pdfs and it will be sent to TEF
+[Success] ServiceName JanoService
+2018-04-20 17:00:09,218 [9] INFO  Topshelf.HostConfigurators.HostConfiguratorImpl [(null)] - Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-04-20 17:00:09,343 [9] DEBUG Topshelf.Builders.RunBuilder [(null)] - Running as a console application, creating the console host.
+2018-04-20 17:00:09,350 [9] DEBUG Topshelf.Hosts.ConsoleRunHost [(null)] - Starting up as a console application
+2018-04-20 17:00:09,354 [9] INFO  JanoService.Service.WinService [(null)] - WinService Start command received.
+2018-04-20 17:00:09,359 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service is now running, press Control+C to exit.
+2018-04-20 17:00:14,743 [13] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - Control+C detected, attempting to stop service.
+2018-04-20 17:00:14,746 [13] TRACE JanoService.Service.WinService [(null)] - WinService Stop command received.
+2018-04-20 17:00:14,750 [9] INFO  Topshelf.Hosts.ConsoleRunHost [(null)] - The JanoService service has stopped.

@@ -14,25 +14,27 @@ namespace JanoService.Service
 
         public ILog Log { get; private set; }
         readonly Timer _timer;
+
+
         public WinService(ILog logger)
         {
-            /*
+            
             // IocModule.cs needs to be updated in case new paramteres are added to this constructor
 
             if (logger == null)
                 throw new ArgumentNullException(nameof(logger));
-
+            
             Log = logger;
-            _timer = new Timer(1000) { AutoReset = true };
+            var time = Properties.Settings.Default.TimeScheduled;
+            _timer = new Timer(time.TotalMilliseconds) { AutoReset = true };
             _timer.Elapsed += (sender, eventArgs) => Console.WriteLine("It is {0} and all is well", DateTime.Now);
-            */
         }
 
         public bool Start(HostControl hostControl)
         {
 
             Log.Info($"{nameof(Service.WinService)} Start command received.");
-          //  _timer.Start();
+            _timer.Start();
             return true;
 
         }
@@ -41,7 +43,7 @@ namespace JanoService.Service
         {
 
             Log.Trace($"{nameof(Service.WinService)} Stop command received.");
-            //_timer.Stop();
+            _timer.Stop();
             return true;
 
         }
@@ -51,7 +53,7 @@ namespace JanoService.Service
 
             Log.Trace($"{nameof(Service.WinService)} Pause command received.");
 
-            //_timer.Stop();
+            _timer.Stop();
             return true;
 
         }
@@ -60,7 +62,7 @@ namespace JanoService.Service
         {
 
             Log.Trace($"{nameof(Service.WinService)} Continue command received.");
-            //_timer.Start();
+            _timer.Start();
             return true;
 
         }
@@ -69,7 +71,7 @@ namespace JanoService.Service
         {
 
             Log.Trace($"{nameof(Service.WinService)} Shutdown command received.");
-            //_timer.Stop();
+            _timer.Stop();
             return true;
 
         }

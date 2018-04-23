@@ -6,20 +6,22 @@ using Topshelf.Ninject;
 
 namespace JanoService.Properties
 {
-
+    
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
     {
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public global::JanoService.AuthenticationType AuthenticationType
+        [global::System.Configuration.DefaultSettingValueAttribute("RunAsLocalSystem")]
+        public global::JanoService.AuthenticationType Authentication
         {
             get
             {
-                return ((global::JanoService.AuthenticationType)(this["AuthenticationType"]));
+                return ((global::JanoService.AuthenticationType)(this["Authentication"]));
             }
         }
     }
+
 }
 namespace JanoService
 {
@@ -62,10 +64,8 @@ namespace JanoService
                     sc.WhenShutdown((s, hostControl) => s.Shutdown(hostControl));
 
                 });
-
                 //=> Service Identity
-                /*
-                var authenticationType = Properties.Settings.Default.AuthenticationType;
+                var authenticationType = Properties.Settings.Default.Authentication;
                 switch (authenticationType)
                 {
                     case AuthenticationType.RunAsPrompt:
@@ -84,19 +84,18 @@ namespace JanoService
                         x.RunAs(Properties.Settings.Default.UserName, Properties.Settings.Default.UserPassword);
                         break;
                 }
-                */
-                x.RunAsLocalService();
+                //x.RunAsLocalService();
                 //=> Service Instalation - These configuration options are used during the service instalation
 
                 //x.StartAutomatically(); // Start the service automatically
-                //x.StartAutomaticallyDelayed(); // Automatic (Delayed) -- only available on .NET 4.0 or later
+                x.StartAutomaticallyDelayed(); // Automatic (Delayed) -- only available on .NET 4.0 or later
                 //x.StartManually(); // Start the service manually
                 //x.Disabled(); // install the service as disabled
 
                 //=> Service Configuration
 
-                //x.EnablePauseAndContinue(); // Specifies that the service supports pause and continue.
-                //x.EnableShutdown(); //Specifies that the service supports the shutdown service command.
+                x.EnablePauseAndContinue(); // Specifies that the service supports pause and continue.
+                x.EnableShutdown(); //Specifies that the service supports the shutdown service command.
 
                 x.SetDescription(description);
                 x.SetDisplayName(displayName);

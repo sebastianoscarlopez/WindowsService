@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JanoService.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="AuthenticationType" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="UserName" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
@@ -12,7 +9,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="TimeScheduled" Type="System.TimeSpan" Scope="Application">
-      <Value Profile="(Default)">00:10:00</Value>
+      <Value Profile="(Default)">00:05:00</Value>
     </Setting>
     <Setting Name="MaxRetries" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">10</Value>
@@ -22,6 +19,9 @@
     </Setting>
     <Setting Name="PathReplace" Type="System.String" Scope="Application">
       <Value Profile="(Default)">\\192.168.252.56\d$\</Value>
+    </Setting>
+    <Setting Name="Authentication" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">RunAsLocalSystem</Value>
     </Setting>
   </Settings>
 </SettingsFile>
