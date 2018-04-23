@@ -42,6 +42,15 @@ C:\desarrollo\git\JanoService\JanoService\bin\Release\Common.Logging.Log4Net1213
 C:\desarrollo\git\JanoService\JanoService\bin\Release\log4net.xml
 C:\desarrollo\git\JanoService\JanoService\bin\Release\Ninject.xml
 C:\desarrollo\git\JanoService\JanoService\bin\Release\Topshelf.xml
-C:\desarrollo\git\JanoService\JanoService\obj\Release\JanoService.csprojResolveAssemblyReference.cache
 C:\desarrollo\git\JanoService\JanoService\obj\Release\JanoService.exe
 C:\desarrollo\git\JanoService\JanoService\obj\Release\JanoService.pdb
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.Core.dll
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.Interfaces.dll
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.Linq.dll
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.PlatformServices.dll
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.Windows.Threading.dll
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.Core.xml
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.Interfaces.xml
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.Linq.xml
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.PlatformServices.xml
+C:\desarrollo\git\JanoService\JanoService\bin\Release\System.Reactive.Windows.Threading.xml

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Timers;
@@ -11,9 +13,10 @@ namespace JanoService.Service
 {
     class WinServiceController
     {
+        private readonly IObservable<long> _time;
+        private IDisposable timeDispose;
 
         public ILog Log { get; private set; }
-        readonly Timer _timer;
 
         public WinServiceController(ILog logger)
         {
@@ -21,61 +24,72 @@ namespace JanoService.Service
                 throw new ArgumentNullException(nameof(logger));
             
             Log = logger;
-            var time = Properties.Settings.Default.TimeScheduled;
-            _timer = new Timer(time.TotalMilliseconds) { AutoReset = true };
-            _timer.Elapsed += process;
+            _time = Observable.Interval(
+                Properties.Settings.Default.TimeScheduled,
+                NewThreadScheduler.Default
+            );
         }
 
-        private void process(object sender, object eventArgs)
+        private void process()
         {
+            PendientesTramite.GetInstance()
+                .updatePendientes();
             var message = $"It is {DateTime.Now} and all is well";
-            Log.Trace($"JanoService - {message}");
+            Log.Info($"JanoService - {message}");
             Console.WriteLine(message);
+        }
+
+        void start()
+        {
+            if (timeDispose == null)
+            {
+                timeDispose = _time.Subscribe(observer =>
+                {
+                    process();
+                });
+            }
+        }
+        void stop()
+        {
+            timeDispose?.Dispose();
+            timeDispose = null;
         }
 
         public bool Start(HostControl hostControl)
         {
             Log.Info($"{nameof(WinServiceController)} Start command received.");
-            process(null, null); // Run immediately
-            _timer.Start(); // Start scheduler
+            start();
             return true;
         }
 
         public bool Stop(HostControl hostControl)
         {
-
             Log.Trace($"{nameof(WinServiceController)} Stop command received.");
-            _timer.Stop();
+            stop();
             return true;
-
         }
 
         public bool Pause(HostControl hostControl)
         {
 
             Log.Trace($"{nameof(WinServiceController)} Pause command received.");
-
-            _timer.Stop();
+            stop();
             return true;
 
         }
 
         public bool Continue(HostControl hostControl)
         {
-
             Log.Trace($"{nameof(Service.WinServiceController)} Continue command received.");
-            _timer.Start();
+            start();
             return true;
-
         }
 
         public bool Shutdown(HostControl hostControl)
         {
-
             Log.Trace($"{nameof(Service.WinServiceController)} Shutdown command received.");
-            _timer.Stop();
+            stop();
             return true;
-
         }
 
     }

@@ -5,6 +5,10 @@ using Topshelf.Common.Logging;
 using Topshelf.Ninject;
 using JanoService;
 
+/// <summary>
+/// JanoService
+/// I was improving my english, sorry for that.
+/// </summary>
 namespace JanoService
 {
     class Program
