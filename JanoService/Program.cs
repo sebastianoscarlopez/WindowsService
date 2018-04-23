@@ -3,26 +3,8 @@ using System.IO;
 using Topshelf;
 using Topshelf.Common.Logging;
 using Topshelf.Ninject;
+using JanoService;
 
-namespace JanoService.Properties
-{
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RunAsLocalSystem")]
-        public global::JanoService.AuthenticationType Authentication
-        {
-            get
-            {
-                return ((global::JanoService.AuthenticationType)(this["Authentication"]));
-            }
-        }
-    }
-
-}
 namespace JanoService
 {
     class Program
@@ -47,7 +29,7 @@ namespace JanoService
                 x.UseCommonLogging();
                 x.UseNinject(new IocModule());
 
-                x.Service<Service.WinService>(sc =>
+                x.Service<Service.WinServiceController>(sc =>
                 {
 
                     sc.ConstructUsingNinject();
@@ -65,8 +47,8 @@ namespace JanoService
 
                 });
                 //=> Service Identity
-                var authenticationType = Properties.Settings.Default.Authentication;
-                switch (authenticationType)
+                switch (Properties.Settings.Default.Authentication
+                    .ToEnum(AuthenticationType.RunAsLocalService))
                 {
                     case AuthenticationType.RunAsPrompt:
                         x.RunAsPrompt();

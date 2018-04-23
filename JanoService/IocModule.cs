@@ -18,7 +18,7 @@ namespace JanoService
                 return LogManager.GetLogger(type);
             });
 
-            Bind<Service.WinService>().ToSelf();
+            Bind<Service.WinServiceController>().ToSelf();
 
         }
     }

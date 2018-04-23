@@ -43,6 +43,5 @@ C:\desarrollo\git\JanoService\JanoService\bin\Debug\Common.Logging.Log4Net1213.x
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\log4net.xml
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\Ninject.xml
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\Topshelf.xml
-C:\desarrollo\git\JanoService\JanoService\obj\Debug\JanoService.csprojResolveAssemblyReference.cache
 C:\desarrollo\git\JanoService\JanoService\obj\Debug\JanoService.exe
 C:\desarrollo\git\JanoService\JanoService\obj\Debug\JanoService.pdb

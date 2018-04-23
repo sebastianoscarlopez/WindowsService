@@ -43,15 +43,6 @@ namespace JanoService.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00:05:00")]
-        public global::System.TimeSpan TimeScheduled {
-            get {
-                return ((global::System.TimeSpan)(this["TimeScheduled"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int MaxRetries {
             get {
@@ -74,6 +65,24 @@ namespace JanoService.Properties {
         public string PathReplace {
             get {
                 return ((string)(this["PathReplace"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RunAsLocalService")]
+        public string Authentication {
+            get {
+                return ((string)(this["Authentication"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:10")]
+        public global::System.TimeSpan TimeScheduled {
+            get {
+                return ((global::System.TimeSpan)(this["TimeScheduled"]));
             }
         }
     }

@@ -9,40 +9,42 @@ using Topshelf;
 
 namespace JanoService.Service
 {
-    class WinService
+    class WinServiceController
     {
 
         public ILog Log { get; private set; }
         readonly Timer _timer;
 
-
-        public WinService(ILog logger)
+        public WinServiceController(ILog logger)
         {
-            
-            // IocModule.cs needs to be updated in case new paramteres are added to this constructor
-
             if (logger == null)
                 throw new ArgumentNullException(nameof(logger));
             
             Log = logger;
             var time = Properties.Settings.Default.TimeScheduled;
             _timer = new Timer(time.TotalMilliseconds) { AutoReset = true };
-            _timer.Elapsed += (sender, eventArgs) => Console.WriteLine("It is {0} and all is well", DateTime.Now);
+            _timer.Elapsed += process;
+        }
+
+        private void process(object sender, object eventArgs)
+        {
+            var message = $"It is {DateTime.Now} and all is well";
+            Log.Trace($"JanoService - {message}");
+            Console.WriteLine(message);
         }
 
         public bool Start(HostControl hostControl)
         {
-
-            Log.Info($"{nameof(Service.WinService)} Start command received.");
-            _timer.Start();
+            Log.Info($"{nameof(WinServiceController)} Start command received.");
+            process(null, null); // Run immediately
+            _timer.Start(); // Start scheduler
             return true;
-
         }
 
         public bool Stop(HostControl hostControl)
         {
 
-            Log.Trace($"{nameof(Service.WinService)} Stop command received.");
+            Log.Trace($"{nameof(WinServiceController)} Stop command received.");
             _timer.Stop();
             return true;
 
@@ -51,7 +53,7 @@ namespace JanoService.Service
         public bool Pause(HostControl hostControl)
         {
 
-            Log.Trace($"{nameof(Service.WinService)} Pause command received.");
+            Log.Trace($"{nameof(WinServiceController)} Pause command received.");
 
             _timer.Stop();
             return true;
@@ -61,7 +63,7 @@ namespace JanoService.Service
         public bool Continue(HostControl hostControl)
         {
 
-            Log.Trace($"{nameof(Service.WinService)} Continue command received.");
+            Log.Trace($"{nameof(Service.WinServiceController)} Continue command received.");
             _timer.Start();
             return true;
 
@@ -70,7 +72,7 @@ namespace JanoService.Service
         public bool Shutdown(HostControl hostControl)
         {
 
-            Log.Trace($"{nameof(Service.WinService)} Shutdown command received.");
+            Log.Trace($"{nameof(Service.WinServiceController)} Shutdown command received.");
             _timer.Stop();
             return true;
 
