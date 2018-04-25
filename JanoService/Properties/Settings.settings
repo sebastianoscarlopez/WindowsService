@@ -21,7 +21,10 @@
       <Value Profile="(Default)">RunAsLocalService</Value>
     </Setting>
     <Setting Name="TimeScheduled" Type="System.TimeSpan" Scope="Application">
-      <Value Profile="(Default)">00:00:10</Value>
+      <Value Profile="(Default)">00:00:03</Value>
+    </Setting>
+    <Setting Name="PathDestination" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\DE002AP\APP_DISTRIBUIDORES_PDF\#NUMERO_DE_ENVIO#\FOTOS\ </Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -79,10 +79,19 @@ namespace JanoService.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00:00:10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:03")]
         public global::System.TimeSpan TimeScheduled {
             get {
                 return ((global::System.TimeSpan)(this["TimeScheduled"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\DE002AP\\APP_DISTRIBUIDORES_PDF\\#NUMERO_DE_ENVIO#\\FOTOS\\ ")]
+        public string PathDestination {
+            get {
+                return ((string)(this["PathDestination"]));
             }
         }
     }

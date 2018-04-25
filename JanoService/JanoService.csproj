@@ -134,6 +134,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PakBackEndModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\THUBAN_INDEXES_DISTRIBUCION.cs">
+      <DependentUpon>TH_OCA_DesaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\THUBAN_STORE.cs">
+      <DependentUpon>TH_OCA_DesaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TH_OCA_DesaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TH_OCA_DesaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TH_OCA_DesaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TH_OCA_DesaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TH_OCA_DesaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TH_OCA_DesaModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Extentions.cs" />
     <Compile Include="IocModule.cs" />
     <Compile Include="Program.cs" />
@@ -143,10 +164,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Service\ArchivosThuban.cs" />
+    <Compile Include="Service\ArchivoThuban.cs" />
     <Compile Include="Service\Pendiente.cs" />
     <Compile Include="Service\PendienteDato.cs" />
     <Compile Include="Service\PendientesTramite.cs" />
+    <Compile Include="Service\ProcesarPDFs.cs" />
+    <Compile Include="Service\Process.cs" />
     <Compile Include="Service\TipoDato.cs" />
+    <Compile Include="Service\TipoFoto.cs" />
     <Compile Include="Service\WinService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +185,13 @@
     </EntityDeploy>
     <None Include="Data\PakBackEndModel.edmx.diagram">
       <DependentUpon>PakBackEndModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Data\TH_OCA_DesaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TH_OCA_DesaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\TH_OCA_DesaModel.edmx.diagram">
+      <DependentUpon>TH_OCA_DesaModel.edmx</DependentUpon>
     </None>
     <None Include="Log.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -179,6 +212,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PakBackEndModel.edmx</DependentUpon>
       <LastGenOutput>PakBackEndModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\TH_OCA_DesaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TH_OCA_DesaModel.edmx</DependentUpon>
+      <LastGenOutput>TH_OCA_DesaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\TH_OCA_DesaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TH_OCA_DesaModel.edmx</DependentUpon>
+      <LastGenOutput>TH_OCA_DesaModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

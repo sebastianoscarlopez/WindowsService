@@ -6,6 +6,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.ServiceProcess;
 using System.Text;
+using System.Threading;
 using System.Timers;
 using Topshelf;
 
@@ -15,6 +16,7 @@ namespace JanoService.Service
     {
         private readonly IObservable<long> _time;
         private IDisposable timeDispose;
+        private readonly Process process;
 
         public ILog Log { get; private set; }
 
@@ -22,31 +24,40 @@ namespace JanoService.Service
         {
             if (logger == null)
                 throw new ArgumentNullException(nameof(logger));
-            
+
+            process = new Process(logger);
+
             Log = logger;
             _time = Observable.Interval(
-                Properties.Settings.Default.TimeScheduled,
-                NewThreadScheduler.Default
+                Properties.Settings.Default.TimeScheduled
             );
-        }
-
-        private void process()
-        {
-            PendientesTramite.GetInstance()
-                .updatePendientes();
-            var message = $"It is {DateTime.Now} and all is well";
-            Log.Info($"JanoService - {message}");
-            Console.WriteLine(message);
         }
 
         void start()
         {
-            if (timeDispose == null)
+            try
             {
-                timeDispose = _time.Subscribe(observer =>
+                if (timeDispose == null)
                 {
-                    process();
-                });
+                    process.run(); // It will be started without delay
+                    timeDispose = _time
+                        .ObserveOn(CurrentThreadScheduler.Instance)
+                        .SubscribeOn(NewThreadScheduler.Default)
+                        .Subscribe(observer => // Time elapsed
+                        {
+                            process.run();
+                        }, (ex) => // Error
+                        {
+                            Log.Error($"Error: {ex.Message} \r\n\tSource:{ex.Source} \r\n\tStackTrace:{ex.StackTrace}");
+                            stop();
+                            Thread.Sleep(1000);
+                            start();
+                        });
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"ERROR was unexpected: {ex.Message} \r\n\tSource:{ex.Source} \r\n\tStackTrace:{ex.StackTrace}");
             }
         }
         void stop()
