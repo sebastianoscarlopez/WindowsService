@@ -14,11 +14,9 @@ namespace JanoService.Service
         {
             Log = log;
         }
-        
         internal void run()
         {
             Log.Info($"Process start: { DateTime.Now}");
-
             PendientesTramite.Instance
                 .GetPendientes() // Get list of tramitation's pending
                 .ObserveOn(CurrentThreadScheduler.Instance)
@@ -27,11 +25,9 @@ namespace JanoService.Service
                 {
                     try // All pending would be processed, even when one fail, in that case error is logged
                     {
-
                         var pathFind = Properties.Settings.Default.PathFind;
                         var pathReplace = Properties.Settings.Default.PathReplace;
                         var pathDestination = Properties.Settings.Default.PathDestination;
-
                         // Process Thuban's files
                         ArchivosThuban.Instance
                             .GetArchivos(Pendiente.NroEnvio.ToString())
@@ -54,13 +50,27 @@ namespace JanoService.Service
                                 // Update AppDistribuidores_DatosAdicionalesTramitaciones table
                                 if (new[] { TipoDato.FOTO_DNI_FRENTE, TipoDato.FOTO_DNI_DORSO, TipoDato.PDF_FIRMA }.Contains(ArchivoThuban.Tipo)) {
                                     PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, ArchivoThuban.Tipo, destino);
+                                    Pendiente.Datos.Find(p => p.TipoDato == ArchivoThuban.Tipo).Valor = destino;
                                 }
-                                //PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, ArchivoThuban.)
                             });
 
                         // Build signed PDF
-
-                        Log.Info($"Process end: { DateTime.Now}");
+                        var pdfPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_ORIGINAL)?.Valor;
+                        var firmaPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_FIRMA)?.Valor;
+                        var firmaCoord = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_PAGINA_XY)?.Valor;
+                        if (pdfPath != null && firmaPath != null)
+                        {
+                            Directory.CreateDirectory($"{pdfPath}PDF_FINAL");
+                            new ProcesarPDF
+                            {
+                                pdfPath = $"{pdfPath}{Pendiente.NroEnvio}.pdf",
+                                pdfDestPath = $"{pdfPath}PDF_FINAL\\{Pendiente.NroEnvio}.pdf",
+                                signed = firmaPath,
+                                signedCoords = firmaCoord
+                            }
+                            .procesar();
+                        }
+                        Log.Info($"Process end: {DateTime.Now} - {Pendiente.NroEnvio}");
                         Console.WriteLine($"pendiente:{Pendiente.NroEnvio}");
                     }
                     catch (Exception ex)
@@ -74,7 +84,6 @@ namespace JanoService.Service
                 {
                     Console.WriteLine($"ultimo pendiente");
                 });
-
             Log.Info($"Process end: { DateTime.Now}");
         }
     }
