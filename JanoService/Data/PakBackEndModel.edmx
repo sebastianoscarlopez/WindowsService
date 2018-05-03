@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PakBackEndModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppDistribuidores_DatosAdicionalesTramitaciones">
+          <Key>
+            <PropertyRef Name="IdDatosAdicionalesTramitacion" />
+          </Key>
+          <Property Name="IdDatosAdicionalesTramitacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTramitacion" Type="int" Nullable="false" />
+          <Property Name="IdTipoDato" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="FechaEnvio" Type="datetime" />
+          <Property Name="FechaFin" Type="datetime" />
+          <Property Name="IdEstadoTramitacion" Type="int" Nullable="false" />
+          <Property Name="CantidadReintentos" Type="int" Nullable="false" />
+          <Property Name="Error" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="AppDistribuidores_TiposDatos">
+          <Key>
+            <PropertyRef Name="IdTipoDato" />
+          </Key>
+          <Property Name="IdTipoDato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AppDistribuidores_Tramitaciones">
+          <Key>
+            <PropertyRef Name="IdTramitacion" />
+          </Key>
+          <Property Name="IdTramitacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPieza" Type="int" Nullable="false" />
+          <Property Name="IdSistema" Type="int" Nullable="false" />
+          <Property Name="NroEnvio" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos">
+          <End Role="AppDistribuidores_TiposDatos" Type="Self.AppDistribuidores_TiposDatos" Multiplicity="1" />
+          <End Role="AppDistribuidores_DatosAdicionalesTramitaciones" Type="Self.AppDistribuidores_DatosAdicionalesTramitaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppDistribuidores_TiposDatos">
+              <PropertyRef Name="IdTipoDato" />
+            </Principal>
+            <Dependent Role="AppDistribuidores_DatosAdicionalesTramitaciones">
+              <PropertyRef Name="IdTipoDato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PakBackEndModelStoreContainer">
+          <EntitySet Name="AppDistribuidores_DatosAdicionalesTramitaciones" EntityType="Self.AppDistribuidores_DatosAdicionalesTramitaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppDistribuidores_TiposDatos" EntityType="Self.AppDistribuidores_TiposDatos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppDistribuidores_Tramitaciones" EntityType="Self.AppDistribuidores_Tramitaciones" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos" Association="Self.FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos">
+            <End Role="AppDistribuidores_TiposDatos" EntitySet="AppDistribuidores_TiposDatos" />
+            <End Role="AppDistribuidores_DatosAdicionalesTramitaciones" EntitySet="AppDistribuidores_DatosAdicionalesTramitaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PakBackEndModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppDistribuidores_DatosAdicionalesTramitaciones">
+          <Key>
+            <PropertyRef Name="IdDatosAdicionalesTramitacion" />
+          </Key>
+          <Property Name="IdDatosAdicionalesTramitacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTramitacion" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoDato" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaEnvio" Type="DateTime" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Precision="3" />
+          <Property Name="IdEstadoTramitacion" Type="Int32" Nullable="false" />
+          <Property Name="CantidadReintentos" Type="Int32" Nullable="false" />
+          <Property Name="Error" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AppDistribuidores_TiposDatos" Relationship="PakBackEndModel.FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos" FromRole="AppDistribuidores_DatosAdicionalesTramitaciones" ToRole="AppDistribuidores_TiposDatos" />
+        </EntityType>
+        <EntityType Name="AppDistribuidores_Tramitaciones">
+          <Key>
+            <PropertyRef Name="IdTramitacion" />
+          </Key>
+          <Property Name="IdTramitacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPieza" Type="Int32" Nullable="false" />
+          <Property Name="IdSistema" Type="Int32" Nullable="false" />
+          <Property Name="NroEnvio" Type="Int64" />
+        </EntityType>
+        <EntityContainer Name="PakBackEndEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppDistribuidores_DatosAdicionalesTramitaciones" EntityType="Self.AppDistribuidores_DatosAdicionalesTramitaciones" />
+          <EntitySet Name="AppDistribuidores_Tramitaciones" EntityType="Self.AppDistribuidores_Tramitaciones" />
+          <EntitySet Name="AppDistribuidores_TiposDatos" EntityType="PakBackEndModel.AppDistribuidores_TiposDatos" />
+          <AssociationSet Name="FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos" Association="PakBackEndModel.FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos">
+            <End Role="AppDistribuidores_TiposDatos" EntitySet="AppDistribuidores_TiposDatos" />
+            <End Role="AppDistribuidores_DatosAdicionalesTramitaciones" EntitySet="AppDistribuidores_DatosAdicionalesTramitaciones" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppDistribuidores_TiposDatos">
+          <Key>
+            <PropertyRef Name="IdTipoDato" />
+          </Key>
+          <Property Name="IdTipoDato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AppDistribuidores_DatosAdicionalesTramitaciones" Relationship="PakBackEndModel.FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos" FromRole="AppDistribuidores_TiposDatos" ToRole="AppDistribuidores_DatosAdicionalesTramitaciones" />
+        </EntityType>
+        <Association Name="FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos">
+          <End Type="PakBackEndModel.AppDistribuidores_TiposDatos" Role="AppDistribuidores_TiposDatos" Multiplicity="1" />
+          <End Type="PakBackEndModel.AppDistribuidores_DatosAdicionalesTramitaciones" Role="AppDistribuidores_DatosAdicionalesTramitaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppDistribuidores_TiposDatos">
+              <PropertyRef Name="IdTipoDato" />
+            </Principal>
+            <Dependent Role="AppDistribuidores_DatosAdicionalesTramitaciones">
+              <PropertyRef Name="IdTipoDato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PakBackEndModelStoreContainer" CdmEntityContainer="PakBackEndEntities">
+          <EntitySetMapping Name="AppDistribuidores_DatosAdicionalesTramitaciones">
+            <EntityTypeMapping TypeName="PakBackEndModel.AppDistribuidores_DatosAdicionalesTramitaciones">
+              <MappingFragment StoreEntitySet="AppDistribuidores_DatosAdicionalesTramitaciones">
+                <ScalarProperty Name="IdDatosAdicionalesTramitacion" ColumnName="IdDatosAdicionalesTramitacion" />
+                <ScalarProperty Name="IdTramitacion" ColumnName="IdTramitacion" />
+                <ScalarProperty Name="IdTipoDato" ColumnName="IdTipoDato" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="FechaEnvio" ColumnName="FechaEnvio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="IdEstadoTramitacion" ColumnName="IdEstadoTramitacion" />
+                <ScalarProperty Name="CantidadReintentos" ColumnName="CantidadReintentos" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppDistribuidores_Tramitaciones">
+            <EntityTypeMapping TypeName="PakBackEndModel.AppDistribuidores_Tramitaciones">
+              <MappingFragment StoreEntitySet="AppDistribuidores_Tramitaciones">
+                <ScalarProperty Name="IdTramitacion" ColumnName="IdTramitacion" />
+                <ScalarProperty Name="IdPieza" ColumnName="IdPieza" />
+                <ScalarProperty Name="IdSistema" ColumnName="IdSistema" />
+                <ScalarProperty Name="NroEnvio" ColumnName="NroEnvio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppDistribuidores_TiposDatos">
+            <EntityTypeMapping TypeName="PakBackEndModel.AppDistribuidores_TiposDatos">
+              <MappingFragment StoreEntitySet="AppDistribuidores_TiposDatos">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdTipoDato" ColumnName="IdTipoDato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

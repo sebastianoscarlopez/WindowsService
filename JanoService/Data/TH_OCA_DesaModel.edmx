@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TH_OCA_DESAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="THUBAN_INDEXES_DISTRIBUCION">
+          <Key>
+            <PropertyRef Name="INDEX_ITEM_ID" />
+          </Key>
+          <Property Name="INDEX_ITEM_ID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="INDEX_ITEM_CLASS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="INDEX_ITEM_NAME" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="TIPO_FOTO" Type="varchar" MaxLength="20" />
+          <Property Name="N_GUIA" Type="varchar" MaxLength="19" />
+          <Property Name="ID_PIEZA" Type="varchar" MaxLength="20" />
+          <Property Name="N_CUENTA" Type="varchar" MaxLength="10" />
+          <Property Name="D_OPERATIVA" Type="varchar" MaxLength="10" />
+          <Property Name="FECHA_VISITA" Type="datetime" />
+          <Property Name="DNI" Type="varchar" MaxLength="10" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="50" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="SUC_TRAMITACION" Type="varchar" MaxLength="3" />
+          <Property Name="D_MOTIVO" Type="int" />
+          <Property Name="USER_DISTRIB" Type="varchar" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="THUBAN_STORE">
+          <Key>
+            <PropertyRef Name="STORE_ITEM_ID" />
+          </Key>
+          <Property Name="STORE_ITEM_ID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="STORE_ITEM_CLASS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="STORE_ITEM_NAME" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="STORE_FILE_PATH" Type="varchar" MaxLength="255" />
+          <Property Name="STORE_CONNECTOR" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_CONNECTOR_ID" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_FILE_SIZE" Type="varchar" MaxLength="20" />
+          <Property Name="STORE_FILE_PAGES" Type="int" />
+          <Property Name="STORE_FILE_TYPE" Type="varchar" MaxLength="30" />
+          <Property Name="STORE_STATUS" Type="int" />
+          <Property Name="STORE_OWNER" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_CREATION_DATE" Type="varchar" MaxLength="10" />
+          <Property Name="STORE_MODIF_DATE" Type="varchar" MaxLength="10" />
+          <Property Name="STORE_VERSION" Type="varchar" MaxLength="5" />
+          <Property Name="STORE_FULLTEXT_INDEX" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityContainer Name="TH_OCA_DESAModelStoreContainer">
+          <EntitySet Name="THUBAN_INDEXES_DISTRIBUCION" EntityType="Self.THUBAN_INDEXES_DISTRIBUCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THUBAN_STORE" EntityType="Self.THUBAN_STORE" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TH_OCA_DESAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="THUBAN_INDEXES_DISTRIBUCION">
+          <Key>
+            <PropertyRef Name="INDEX_ITEM_ID" />
+          </Key>
+          <Property Name="INDEX_ITEM_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="INDEX_ITEM_CLASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="INDEX_ITEM_NAME" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPO_FOTO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="N_GUIA" Type="String" MaxLength="19" FixedLength="false" Unicode="false" />
+          <Property Name="ID_PIEZA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="N_CUENTA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="D_OPERATIVA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_VISITA" Type="DateTime" Precision="3" />
+          <Property Name="DNI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUC_TRAMITACION" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="D_MOTIVO" Type="Int32" />
+          <Property Name="USER_DISTRIB" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="THUBAN_STORE">
+          <Key>
+            <PropertyRef Name="STORE_ITEM_ID" />
+          </Key>
+          <Property Name="STORE_ITEM_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STORE_ITEM_CLASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STORE_ITEM_NAME" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STORE_FILE_PATH" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_CONNECTOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_CONNECTOR_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_FILE_SIZE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_FILE_PAGES" Type="Int32" />
+          <Property Name="STORE_FILE_TYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_STATUS" Type="Int32" />
+          <Property Name="STORE_OWNER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_CREATION_DATE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_MODIF_DATE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_VERSION" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_FULLTEXT_INDEX" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="TH_OCA_DESAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="THUBAN_INDEXES_DISTRIBUCION" EntityType="Self.THUBAN_INDEXES_DISTRIBUCION" />
+          <EntitySet Name="THUBAN_STORE" EntityType="Self.THUBAN_STORE" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TH_OCA_DESAModelStoreContainer" CdmEntityContainer="TH_OCA_DESAEntities">
+          <EntitySetMapping Name="THUBAN_INDEXES_DISTRIBUCION">
+            <EntityTypeMapping TypeName="TH_OCA_DESAModel.THUBAN_INDEXES_DISTRIBUCION">
+              <MappingFragment StoreEntitySet="THUBAN_INDEXES_DISTRIBUCION">
+                <ScalarProperty Name="INDEX_ITEM_ID" ColumnName="INDEX_ITEM_ID" />
+                <ScalarProperty Name="INDEX_ITEM_CLASS" ColumnName="INDEX_ITEM_CLASS" />
+                <ScalarProperty Name="INDEX_ITEM_NAME" ColumnName="INDEX_ITEM_NAME" />
+                <ScalarProperty Name="TIPO_FOTO" ColumnName="TIPO_FOTO" />
+                <ScalarProperty Name="N_GUIA" ColumnName="N_GUIA" />
+                <ScalarProperty Name="ID_PIEZA" ColumnName="ID_PIEZA" />
+                <ScalarProperty Name="N_CUENTA" ColumnName="N_CUENTA" />
+                <ScalarProperty Name="D_OPERATIVA" ColumnName="D_OPERATIVA" />
+                <ScalarProperty Name="FECHA_VISITA" ColumnName="FECHA_VISITA" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="SUC_TRAMITACION" ColumnName="SUC_TRAMITACION" />
+                <ScalarProperty Name="D_MOTIVO" ColumnName="D_MOTIVO" />
+                <ScalarProperty Name="USER_DISTRIB" ColumnName="USER_DISTRIB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THUBAN_STORE">
+            <EntityTypeMapping TypeName="TH_OCA_DESAModel.THUBAN_STORE">
+              <MappingFragment StoreEntitySet="THUBAN_STORE">
+                <ScalarProperty Name="STORE_ITEM_ID" ColumnName="STORE_ITEM_ID" />
+                <ScalarProperty Name="STORE_ITEM_CLASS" ColumnName="STORE_ITEM_CLASS" />
+                <ScalarProperty Name="STORE_ITEM_NAME" ColumnName="STORE_ITEM_NAME" />
+                <ScalarProperty Name="STORE_FILE_PATH" ColumnName="STORE_FILE_PATH" />
+                <ScalarProperty Name="STORE_CONNECTOR" ColumnName="STORE_CONNECTOR" />
+                <ScalarProperty Name="STORE_CONNECTOR_ID" ColumnName="STORE_CONNECTOR_ID" />
+                <ScalarProperty Name="STORE_FILE_SIZE" ColumnName="STORE_FILE_SIZE" />
+                <ScalarProperty Name="STORE_FILE_PAGES" ColumnName="STORE_FILE_PAGES" />
+                <ScalarProperty Name="STORE_FILE_TYPE" ColumnName="STORE_FILE_TYPE" />
+                <ScalarProperty Name="STORE_STATUS" ColumnName="STORE_STATUS" />
+                <ScalarProperty Name="STORE_OWNER" ColumnName="STORE_OWNER" />
+                <ScalarProperty Name="STORE_CREATION_DATE" ColumnName="STORE_CREATION_DATE" />
+                <ScalarProperty Name="STORE_MODIF_DATE" ColumnName="STORE_MODIF_DATE" />
+                <ScalarProperty Name="STORE_VERSION" ColumnName="STORE_VERSION" />
+                <ScalarProperty Name="STORE_FULLTEXT_INDEX" ColumnName="STORE_FULLTEXT_INDEX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

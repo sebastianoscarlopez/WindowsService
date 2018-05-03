@@ -116,6 +116,9 @@
     <Compile Include="Data\AppDistribuidores_DatosAdicionalesTramitaciones.cs">
       <DependentUpon>PakBackEndModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\AppDistribuidores_TiposDatos.cs">
+      <DependentUpon>PakBackEndModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\AppDistribuidores_Tramitaciones.cs">
       <DependentUpon>PakBackEndModel.tt</DependentUpon>
     </Compile>
@@ -166,13 +169,13 @@
     </Compile>
     <Compile Include="Service\ArchivosThuban.cs" />
     <Compile Include="Service\ArchivoThuban.cs" />
+    <Compile Include="Service\ArchivosDestino.cs" />
     <Compile Include="Service\Pendiente.cs" />
     <Compile Include="Service\PendienteDato.cs" />
     <Compile Include="Service\PendientesTramite.cs" />
     <Compile Include="Service\ProcesarPDFs.cs" />
     <Compile Include="Service\Process.cs" />
     <Compile Include="Service\TipoDato.cs" />
-    <Compile Include="Service\TipoFoto.cs" />
     <Compile Include="Service\WinService.cs" />
   </ItemGroup>
   <ItemGroup>
