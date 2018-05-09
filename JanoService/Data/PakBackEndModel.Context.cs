@@ -28,5 +28,8 @@ namespace JanoService.Data
         public virtual DbSet<AppDistribuidores_DatosAdicionalesTramitaciones> AppDistribuidores_DatosAdicionalesTramitaciones { get; set; }
         public virtual DbSet<AppDistribuidores_Tramitaciones> AppDistribuidores_Tramitaciones { get; set; }
         public virtual DbSet<AppDistribuidores_TiposDatos> AppDistribuidores_TiposDatos { get; set; }
+        public virtual DbSet<AppDistribuidores_TiposFormulariosJANO> AppDistribuidores_TiposFormulariosJANO { get; set; }
+        public virtual DbSet<OrdenRetiro> OrdenRetiro { get; set; }
+        public virtual DbSet<Piezas> Piezas { get; set; }
     }
 }

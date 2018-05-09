@@ -9,6 +9,9 @@
         <EntityTypeShape EntityType="PakBackEndModel.AppDistribuidores_Tramitaciones" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PakBackEndModel.AppDistribuidores_TiposDatos" Width="1.5" PointX="0.75" PointY="5.375" />
         <AssociationConnector Association="PakBackEndModel.FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos" />
+        <EntityTypeShape EntityType="PakBackEndModel.AppDistribuidores_TiposFormulariosJANO" Width="2.75" PointX="2.5" PointY="3.75" />
+        <EntityTypeShape EntityType="PakBackEndModel.OrdenRetiro" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PakBackEndModel.Piezas" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -61,15 +61,6 @@ namespace JanoService.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\192.168.252.56\\d$\\")]
-        public string PathReplace {
-            get {
-                return ((string)(this["PathReplace"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("RunAsLocalService")]
         public string Authentication {
             get {
@@ -88,10 +79,38 @@ namespace JanoService.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\DE002AP\\APP_DISTRIBUIDORES_PDF\\#NUMERO_DE_ENVIO#\\FOTOS\\ ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\De002ap\\app_distribuidores_pdf\\FOTOS_THUBAN\\")]
+        public string PathReplace {
+            get {
+                return ((string)(this["PathReplace"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\DE002AP\\APP_DISTRIBUIDORES_PDF\\")]
         public string PathDestination {
             get {
                 return ((string)(this["PathDestination"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.movistar.com.ar/telefonica/sandbox/documentManagement/v1/docGroups/do" +
+            "cEntregaCorreoDown/documents")]
+        public string urlUpload {
+            get {
+                return ((string)(this["urlUpload"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.movistar.com.ar/telefonica/sandbox/v1/oauth2/token")]
+        public string urlToken {
+            get {
+                return ((string)(this["urlToken"]));
             }
         }
     }

@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 
 namespace JanoService.Service
 {
     /// <summary>
-    /// Parcel with processing pending
+    /// Parcel with process pending
     /// </summary>
     public class PendientesTramite
     {
         static readonly PendientesTramite instance = new PendientesTramite();
-        /// Singleton class, private method prevent instansiation
         private PendientesTramite() { }
         static public PendientesTramite Instance
         {
@@ -28,7 +28,7 @@ namespace JanoService.Service
                 {
                     var tramitaciones = (from t in context.AppDistribuidores_Tramitaciones
                                          join dt in context.AppDistribuidores_DatosAdicionalesTramitaciones on t.IdTramitacion equals dt.IdTramitacion
-                                         where t.IdSistema == 1 && dt.CantidadReintentos <= maxRetries
+                                         where t.IdSistema == 1 && dt.CantidadReintentos <= maxRetries && t.NroEnvio > 0
                                          group dt by t into gt
                                          select new Pendiente
                                          {
@@ -42,10 +42,26 @@ namespace JanoService.Service
                                                           TipoDato = (TipoDato)d.IdTipoDato,
                                                           CantidadReintentos = d.CantidadReintentos,
                                                           IdEstadoTramitacion = d.IdEstadoTramitacion,
-                                                          Valor = d.Valor
+                                                          Valor = d.Valor,
+                                                          FechaEnvio = d.FechaEnvio,
+                                                          FechaFin = d.FechaFin,
+                                                          Error = d.Error
                                                       }).ToList()
-                                         });
-                    return tramitaciones.ToList().ToObservable();
+                                         }).ToList();
+                    foreach(var t in tramitaciones)
+                    {
+                        var dato = t.Datos.Where(d => d.TipoDato == TipoDato.TIPO_TRAMITEFORMULARY_TYPE).FirstOrDefault();
+                        int id;
+                        if (dato!= null && int.TryParse(dato.Valor, out id))
+                        {
+                            dato.Valor = (from f in context.AppDistribuidores_TiposFormulariosJANO
+                                          where f.IdTipoFormularioJANO == id
+                                          select f.CodigoJANO
+                                          ).Single();
+                        }
+                    }
+
+                    return tramitaciones.ToObservable();
                 }
             }
             catch (Exception ex)
@@ -57,16 +73,33 @@ namespace JanoService.Service
                 });
             }
         }
-        public bool UpdateDato(int IdPieza, TipoDato tipo, string valor)
+        public long getTramite(Pendiente pendiente)
+        {
+            using (var context = new Data.PakBackEndEntities())
+            {
+                var tramite = (from p in context.Piezas
+                               join o in context.OrdenRetiro on p.IdOrdenRetiro equals o.IdOrdenRetiro
+                               where p.IdPieza == pendiente.IdPieza
+                               select new { p.NroProducto, o.FechaCarga }
+                              ).Single();
+                return long.Parse($"{tramite.NroProducto}{tramite.FechaCarga?.ToString("yyyy")}");
+            }
+        }
+        public bool UpdateDato(int IdPieza, PendienteDato pendienteDato)
         {
             using (var context = new Data.PakBackEndEntities())
             {
                 var dato = (from t in context.AppDistribuidores_Tramitaciones
                            join dt in context.AppDistribuidores_DatosAdicionalesTramitaciones on t.IdTramitacion equals dt.IdTramitacion
-                           where t.IdSistema == 1 && t.IdPieza == IdPieza && dt.IdTipoDato == (int)tipo
-                           select dt
+                           where t.IdSistema == 1 && t.IdPieza == IdPieza && dt.IdTipoDato == (int)pendienteDato.TipoDato
+                            select dt
                            ).Single();
-                dato.Valor = valor;
+                dato.Valor = pendienteDato.Valor;
+                dato.IdEstadoTramitacion = pendienteDato.IdEstadoTramitacion;
+                dato.CantidadReintentos = pendienteDato.CantidadReintentos;
+                dato.Error = pendienteDato.Error;
+                dato.FechaEnvio = pendienteDato.FechaEnvio;
+                dato.FechaFin = pendienteDato.FechaFin;
 
                 return context.SaveChanges() > 0;
             }

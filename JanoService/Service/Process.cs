@@ -33,10 +33,9 @@ namespace JanoService.Service
                             .GetArchivos(Pendiente.NroEnvio.ToString())
                             .ObserveOn(CurrentThreadScheduler.Instance)
                             .SubscribeOn(CurrentThreadScheduler.Instance)
-                            //.Where(ArchivoThuban => tipos.Contains(ArchivoThuban.Tipo))
                             .Subscribe(ArchivoThuban =>
                             {
-                                // Copy all files from Thuban to path destination
+                                Log.Info($"Process Copy file from Thuban to path destination: {DateTime.Now} - {Pendiente.NroEnvio} - {pathFind}");
                                 var origen = ArchivoThuban.Ruta.Replace(pathFind, pathReplace);
                                 var carpeta = ArchivoThuban.Tipo == TipoDato.PDF_FIRMA
                                     ? "FIRMA"
@@ -49,16 +48,16 @@ namespace JanoService.Service
 
                                 // Update AppDistribuidores_DatosAdicionalesTramitaciones table
                                 if (new[] { TipoDato.FOTO_DNI_FRENTE, TipoDato.FOTO_DNI_DORSO, TipoDato.PDF_FIRMA }.Contains(ArchivoThuban.Tipo)) {
-                                    PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, ArchivoThuban.Tipo, destino);
-                                    Pendiente.Datos.Find(p => p.TipoDato == ArchivoThuban.Tipo).Valor = destino;
+                                    var dato = Pendiente.Datos.Find(p => p.TipoDato == ArchivoThuban.Tipo);
+                                    dato.Valor = destino;
+                                    PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, dato);
                                 }
-                            });
-
-                        // Build signed PDF
+                            });                        
+                        Log.Info($"Process Build signed PDF: {DateTime.Now} - {Pendiente.NroEnvio}");
                         var pdfPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_ORIGINAL)?.Valor;
                         var firmaPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_FIRMA)?.Valor;
                         var firmaCoord = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_PAGINA_XY)?.Valor;
-                        if (pdfPath != null && firmaPath != null)
+                        if ((pdfPath??"").Length > 0 && (firmaPath ?? "").Length > 0)
                         {
                             Directory.CreateDirectory($"{pdfPath}PDF_FINAL");
                             new ProcesarPDF
@@ -69,6 +68,53 @@ namespace JanoService.Service
                                 signedCoords = firmaCoord
                             }
                             .procesar();
+                        } else
+                        {
+                            Log.Warn($"Process sin datos para firma: {DateTime.Now} - {Pendiente.NroEnvio}");
+                            return;
+                        }
+                        var tramite = PendientesTramite.Instance.getTramite(Pendiente);
+                        var tipoTramite = Pendiente.Datos.Where(d => d.TipoDato == TipoDato.TIPO_TRAMITEFORMULARY_TYPE).FirstOrDefault();
+                        if (tramite == 0 || tipoTramite == null)
+                        {
+                            Log.Warn($"Process Upload sin dato de tramite: {DateTime.Now} - {Pendiente.NroEnvio}");
+                            return;
+                        }
+                        Log.Info($"Process Upload dni photos and signed pdf: {DateTime.Now} - {Pendiente.NroEnvio}");
+                        var upload = new UploadFiles(tramite, tipoTramite.Valor, Properties.Settings.Default.urlUpload, Properties.Settings.Default.urlToken);
+                        foreach (var tipo in new TipoDato[] { TipoDato.FOTO_DNI_FRENTE, TipoDato.FOTO_DNI_DORSO, TipoDato.PDF_ORIGINAL })
+                        {
+                            var dato = Pendiente.Datos.Find(p => p.TipoDato == tipo);
+                            var path = dato?.Valor + (tipo == TipoDato.PDF_ORIGINAL ? $"{Pendiente.NroEnvio}.pdf" : "");
+                            if ((path ?? "").Length > 0)
+                            {
+                                if (dato.IdEstadoTramitacion == 2)
+                                {
+                                    dato.FechaEnvio = DateTime.Now;
+                                    dato.CantidadReintentos++;
+                                    PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, dato);
+                                    var isUpload = upload.uploadFile(path, TypeUpload.Image, tipo);
+                                    dato.FechaFin = DateTime.Now;
+                                    if (isUpload) {
+                                        dato.IdEstadoTramitacion = 1;
+                                    }
+                                    else
+                                    {
+                                        if (dato.CantidadReintentos > Properties.Settings.Default.MaxRetries)
+                                        {
+                                            dato.IdEstadoTramitacion = 3;
+                                        }
+                                    }
+                                    if(!PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, dato))
+                                    {
+                                        throw new Exception($"Process Upload {tipo} ERROR: {DateTime.Now} - {Pendiente.NroEnvio} - {path}");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Log.Warn($"Process Upload {tipo} failed: {DateTime.Now} - {Pendiente.NroEnvio} - {path}");
+                            }
                         }
                         Log.Info($"Process end: {DateTime.Now} - {Pendiente.NroEnvio}");
                         Console.WriteLine($"pendiente:{Pendiente.NroEnvio}");

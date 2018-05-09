@@ -12,5 +12,8 @@ namespace JanoService.Service
         public string Valor { get; set; }
         public int CantidadReintentos { get; set; }
         public int IdEstadoTramitacion { get; set; }
+        public DateTime? FechaEnvio { get; set; }
+        public DateTime? FechaFin { get; set; }
+        public string Error { get; set; }
     }
 }

@@ -27,6 +27,14 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Codigo" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="AppDistribuidores_TiposFormulariosJANO">
+          <Key>
+            <PropertyRef Name="IdTipoFormularioJANO" />
+          </Key>
+          <Property Name="IdTipoFormularioJANO" Type="int" Nullable="false" />
+          <Property Name="CodigoJANO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="AppDistribuidores_Tramitaciones">
           <Key>
             <PropertyRef Name="IdTramitacion" />
@@ -35,6 +43,102 @@
           <Property Name="IdPieza" Type="int" Nullable="false" />
           <Property Name="IdSistema" Type="int" Nullable="false" />
           <Property Name="NroEnvio" Type="bigint" />
+        </EntityType>
+        <EntityType Name="OrdenRetiro">
+          <Key>
+            <PropertyRef Name="IdOrdenRetiro" />
+          </Key>
+          <Property Name="IdOrdenRetiro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRemitente" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="QuickShip" Type="bit" />
+          <Property Name="NroOperativa" Type="int" />
+          <Property Name="CentroCosto" Type="int" />
+          <Property Name="IdFormaPago" Type="int" />
+          <Property Name="NroCuentaTarjeta" Type="varchar" MaxLength="20" />
+          <Property Name="TitularPago" Type="varchar" MaxLength="30" />
+          <Property Name="VtoTarjeta" Type="char" MaxLength="5" />
+          <Property Name="DireccionTitular" Type="varchar" MaxLength="30" />
+          <Property Name="CodPostalTitularPago" Type="char" MaxLength="8" />
+          <Property Name="FechaRetiro" Type="smalldatetime" />
+          <Property Name="IdFranjaHoraria" Type="int" />
+          <Property Name="EstadoOrden" Type="int" />
+          <Property Name="FechaEstado" Type="datetime" />
+          <Property Name="ImposicionSucursal" Type="int" />
+          <Property Name="RecibirDetalle" Type="bit" />
+          <Property Name="EnviarDetalle" Type="bit" />
+          <Property Name="FechaCarga" Type="datetime" />
+          <Property Name="IdSucursalOCA" Type="int" Nullable="false" />
+          <Property Name="DomicilioRetiro" Type="varchar" MaxLength="60" />
+          <Property Name="NumeroRetiro" Type="varchar" MaxLength="5" />
+          <Property Name="PisoRetiro" Type="char" MaxLength="6" />
+          <Property Name="DeptoRetiro" Type="varchar" MaxLength="4" />
+          <Property Name="IdCodPostalRetiro" Type="int" />
+          <Property Name="LocalidadRetiro" Type="varchar" MaxLength="30" />
+          <Property Name="PciaRetiro" Type="varchar" MaxLength="30" />
+          <Property Name="ContactoRetiro" Type="varchar" MaxLength="30" />
+          <Property Name="Solicitante" Type="varchar" MaxLength="30" />
+          <Property Name="NroImposicion" Type="char" MaxLength="12" />
+          <Property Name="NroRecorrido" Type="int" />
+          <Property Name="OrigenCarga" Type="char" MaxLength="3" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="100" />
+          <Property Name="CantidadPaquetes" Type="int" />
+          <Property Name="CantidadRecibida" Type="int" />
+          <Property Name="IdUsuarioWEB" Type="int" />
+          <Property Name="TelefonoRetiro" Type="varchar" MaxLength="15" />
+          <Property Name="IdTipoEntregaFact" Type="tinyint" />
+          <Property Name="GeneroBonifija" Type="bit" />
+          <Property Name="CargaParcial" Type="tinyint" Nullable="false" />
+          <Property Name="eCorreoRetiro" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Piezas">
+          <Key>
+            <PropertyRef Name="IdPieza" />
+          </Key>
+          <Property Name="IdPieza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NroProducto" Type="varchar" MaxLength="30" />
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="IdSucursalOCA" Type="int" Nullable="false" />
+          <Property Name="IdDestinatario" Type="int" />
+          <Property Name="IdTipoPieza" Type="int" Nullable="false" />
+          <Property Name="IdOrdenRetiro" Type="int" />
+          <Property Name="IdTipoEntrega" Type="int" />
+          <Property Name="NumeroEnvio" Type="char" MaxLength="19" Nullable="false" />
+          <Property Name="IdUltimoLogAccion" Type="int" />
+          <Property Name="CantidadPaquetes" Type="int" Nullable="false" />
+          <Property Name="VolumenTotal" Type="numeric" Precision="9" Scale="5" Nullable="false" />
+          <Property Name="PesoTotal" Type="numeric" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="DiasEntrega" Type="int" />
+          <Property Name="PrecioEnvio" Type="money" />
+          <Property Name="IdTipoServicio" Type="int" />
+          <Property Name="IdAccion" Type="int" />
+          <Property Name="IdEstado" Type="int" Nullable="false" />
+          <Property Name="IdMotivo" Type="int" />
+          <Property Name="IdAccionOperativa" Type="int" />
+          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="NroRemito" Type="varchar" MaxLength="13" />
+          <Property Name="ImporteRemito" Type="money" />
+          <Property Name="NroCheque" Type="char" MaxLength="15" />
+          <Property Name="Banco" Type="varchar" MaxLength="30" />
+          <Property Name="PesoAforado" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="Seguro" Type="money" />
+          <Property Name="Facturado" Type="int" />
+          <Property Name="IdRemitente" Type="int" />
+          <Property Name="FechaImposicion" Type="datetime" />
+          <Property Name="IdSucImposicion" Type="int" />
+          <Property Name="IdSucTramitacion" Type="int" />
+          <Property Name="IdSucRendicion" Type="int" />
+          <Property Name="IdRendicionOperativa" Type="int" />
+          <Property Name="idRendicionAdminis" Type="int" />
+          <Property Name="IdPiezaPadre" Type="int" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="Imp_QRemito" Type="int" />
+          <Property Name="NombreReceptor" Type="varchar" MaxLength="50" />
+          <Property Name="IdEstadoRetail" Type="int" />
+          <Property Name="IdPPadreRetail" Type="int" />
+          <Property Name="IdOperativa" Type="int" />
         </EntityType>
         <Association Name="FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos">
           <End Role="AppDistribuidores_TiposDatos" Type="Self.AppDistribuidores_TiposDatos" Multiplicity="1" />
@@ -51,7 +155,10 @@
         <EntityContainer Name="PakBackEndModelStoreContainer">
           <EntitySet Name="AppDistribuidores_DatosAdicionalesTramitaciones" EntityType="Self.AppDistribuidores_DatosAdicionalesTramitaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppDistribuidores_TiposDatos" EntityType="Self.AppDistribuidores_TiposDatos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppDistribuidores_TiposFormulariosJANO" EntityType="Self.AppDistribuidores_TiposFormulariosJANO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppDistribuidores_Tramitaciones" EntityType="Self.AppDistribuidores_Tramitaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenRetiro" EntityType="Self.OrdenRetiro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Piezas" EntityType="Self.Piezas" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos" Association="Self.FK_AppDistribuidores_DatosAdicionalesTramitaciones_AppDistribuidores_TiposDatos">
             <End Role="AppDistribuidores_TiposDatos" EntitySet="AppDistribuidores_TiposDatos" />
             <End Role="AppDistribuidores_DatosAdicionalesTramitaciones" EntitySet="AppDistribuidores_DatosAdicionalesTramitaciones" />
@@ -93,6 +200,9 @@
             <End Role="AppDistribuidores_TiposDatos" EntitySet="AppDistribuidores_TiposDatos" />
             <End Role="AppDistribuidores_DatosAdicionalesTramitaciones" EntitySet="AppDistribuidores_DatosAdicionalesTramitaciones" />
           </AssociationSet>
+          <EntitySet Name="AppDistribuidores_TiposFormulariosJANO" EntityType="PakBackEndModel.AppDistribuidores_TiposFormulariosJANO" />
+          <EntitySet Name="OrdenRetiro" EntityType="PakBackEndModel.OrdenRetiro" />
+          <EntitySet Name="Piezas" EntityType="PakBackEndModel.Piezas" />
         </EntityContainer>
         <EntityType Name="AppDistribuidores_TiposDatos">
           <Key>
@@ -115,6 +225,110 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AppDistribuidores_TiposFormulariosJANO">
+          <Key>
+            <PropertyRef Name="IdTipoFormularioJANO" />
+          </Key>
+          <Property Name="IdTipoFormularioJANO" Type="Int32" Nullable="false" />
+          <Property Name="CodigoJANO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OrdenRetiro">
+          <Key>
+            <PropertyRef Name="IdOrdenRetiro" />
+          </Key>
+          <Property Name="IdOrdenRetiro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRemitente" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="QuickShip" Type="Boolean" />
+          <Property Name="NroOperativa" Type="Int32" />
+          <Property Name="CentroCosto" Type="Int32" />
+          <Property Name="IdFormaPago" Type="Int32" />
+          <Property Name="NroCuentaTarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TitularPago" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="VtoTarjeta" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="DireccionTitular" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CodPostalTitularPago" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="FechaRetiro" Type="DateTime" Precision="0" />
+          <Property Name="IdFranjaHoraria" Type="Int32" />
+          <Property Name="EstadoOrden" Type="Int32" />
+          <Property Name="FechaEstado" Type="DateTime" Precision="3" />
+          <Property Name="ImposicionSucursal" Type="Int32" />
+          <Property Name="RecibirDetalle" Type="Boolean" />
+          <Property Name="EnviarDetalle" Type="Boolean" />
+          <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+          <Property Name="IdSucursalOCA" Type="Int32" Nullable="false" />
+          <Property Name="DomicilioRetiro" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroRetiro" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PisoRetiro" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="DeptoRetiro" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IdCodPostalRetiro" Type="Int32" />
+          <Property Name="LocalidadRetiro" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PciaRetiro" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactoRetiro" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Solicitante" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NroImposicion" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Name="NroRecorrido" Type="Int32" />
+          <Property Name="OrigenCarga" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CantidadPaquetes" Type="Int32" />
+          <Property Name="CantidadRecibida" Type="Int32" />
+          <Property Name="IdUsuarioWEB" Type="Int32" />
+          <Property Name="TelefonoRetiro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoEntregaFact" Type="Byte" />
+          <Property Name="GeneroBonifija" Type="Boolean" />
+          <Property Name="CargaParcial" Type="Byte" Nullable="false" />
+          <Property Name="eCorreoRetiro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Piezas">
+          <Key>
+            <PropertyRef Name="IdPieza" />
+          </Key>
+          <Property Name="IdPieza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NroProducto" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursalOCA" Type="Int32" Nullable="false" />
+          <Property Name="IdDestinatario" Type="Int32" />
+          <Property Name="IdTipoPieza" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenRetiro" Type="Int32" />
+          <Property Name="IdTipoEntrega" Type="Int32" />
+          <Property Name="NumeroEnvio" Type="String" Nullable="false" MaxLength="19" FixedLength="true" Unicode="false" />
+          <Property Name="IdUltimoLogAccion" Type="Int32" />
+          <Property Name="CantidadPaquetes" Type="Int32" Nullable="false" />
+          <Property Name="VolumenTotal" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="PesoTotal" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="DiasEntrega" Type="Int32" />
+          <Property Name="PrecioEnvio" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IdTipoServicio" Type="Int32" />
+          <Property Name="IdAccion" Type="Int32" />
+          <Property Name="IdEstado" Type="Int32" Nullable="false" />
+          <Property Name="IdMotivo" Type="Int32" />
+          <Property Name="IdAccionOperativa" Type="Int32" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="NroRemito" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="ImporteRemito" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NroCheque" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Banco" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PesoAforado" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Seguro" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Facturado" Type="Int32" />
+          <Property Name="IdRemitente" Type="Int32" />
+          <Property Name="FechaImposicion" Type="DateTime" Precision="3" />
+          <Property Name="IdSucImposicion" Type="Int32" />
+          <Property Name="IdSucTramitacion" Type="Int32" />
+          <Property Name="IdSucRendicion" Type="Int32" />
+          <Property Name="IdRendicionOperativa" Type="Int32" />
+          <Property Name="idRendicionAdminis" Type="Int32" />
+          <Property Name="IdPiezaPadre" Type="Int32" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <Property Name="Imp_QRemito" Type="Int32" />
+          <Property Name="NombreReceptor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstadoRetail" Type="Int32" />
+          <Property Name="IdPPadreRetail" Type="Int32" />
+          <Property Name="IdOperativa" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -152,6 +366,113 @@
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdTipoDato" ColumnName="IdTipoDato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppDistribuidores_TiposFormulariosJANO">
+            <EntityTypeMapping TypeName="PakBackEndModel.AppDistribuidores_TiposFormulariosJANO">
+              <MappingFragment StoreEntitySet="AppDistribuidores_TiposFormulariosJANO">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CodigoJANO" ColumnName="CodigoJANO" />
+                <ScalarProperty Name="IdTipoFormularioJANO" ColumnName="IdTipoFormularioJANO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenRetiro">
+            <EntityTypeMapping TypeName="PakBackEndModel.OrdenRetiro">
+              <MappingFragment StoreEntitySet="OrdenRetiro">
+                <ScalarProperty Name="eCorreoRetiro" ColumnName="eCorreoRetiro" />
+                <ScalarProperty Name="CargaParcial" ColumnName="CargaParcial" />
+                <ScalarProperty Name="GeneroBonifija" ColumnName="GeneroBonifija" />
+                <ScalarProperty Name="IdTipoEntregaFact" ColumnName="IdTipoEntregaFact" />
+                <ScalarProperty Name="TelefonoRetiro" ColumnName="TelefonoRetiro" />
+                <ScalarProperty Name="IdUsuarioWEB" ColumnName="IdUsuarioWEB" />
+                <ScalarProperty Name="CantidadRecibida" ColumnName="CantidadRecibida" />
+                <ScalarProperty Name="CantidadPaquetes" ColumnName="CantidadPaquetes" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="OrigenCarga" ColumnName="OrigenCarga" />
+                <ScalarProperty Name="NroRecorrido" ColumnName="NroRecorrido" />
+                <ScalarProperty Name="NroImposicion" ColumnName="NroImposicion" />
+                <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
+                <ScalarProperty Name="ContactoRetiro" ColumnName="ContactoRetiro" />
+                <ScalarProperty Name="PciaRetiro" ColumnName="PciaRetiro" />
+                <ScalarProperty Name="LocalidadRetiro" ColumnName="LocalidadRetiro" />
+                <ScalarProperty Name="IdCodPostalRetiro" ColumnName="IdCodPostalRetiro" />
+                <ScalarProperty Name="DeptoRetiro" ColumnName="DeptoRetiro" />
+                <ScalarProperty Name="PisoRetiro" ColumnName="PisoRetiro" />
+                <ScalarProperty Name="NumeroRetiro" ColumnName="NumeroRetiro" />
+                <ScalarProperty Name="DomicilioRetiro" ColumnName="DomicilioRetiro" />
+                <ScalarProperty Name="IdSucursalOCA" ColumnName="IdSucursalOCA" />
+                <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+                <ScalarProperty Name="EnviarDetalle" ColumnName="EnviarDetalle" />
+                <ScalarProperty Name="RecibirDetalle" ColumnName="RecibirDetalle" />
+                <ScalarProperty Name="ImposicionSucursal" ColumnName="ImposicionSucursal" />
+                <ScalarProperty Name="FechaEstado" ColumnName="FechaEstado" />
+                <ScalarProperty Name="EstadoOrden" ColumnName="EstadoOrden" />
+                <ScalarProperty Name="IdFranjaHoraria" ColumnName="IdFranjaHoraria" />
+                <ScalarProperty Name="FechaRetiro" ColumnName="FechaRetiro" />
+                <ScalarProperty Name="CodPostalTitularPago" ColumnName="CodPostalTitularPago" />
+                <ScalarProperty Name="DireccionTitular" ColumnName="DireccionTitular" />
+                <ScalarProperty Name="VtoTarjeta" ColumnName="VtoTarjeta" />
+                <ScalarProperty Name="TitularPago" ColumnName="TitularPago" />
+                <ScalarProperty Name="NroCuentaTarjeta" ColumnName="NroCuentaTarjeta" />
+                <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
+                <ScalarProperty Name="CentroCosto" ColumnName="CentroCosto" />
+                <ScalarProperty Name="NroOperativa" ColumnName="NroOperativa" />
+                <ScalarProperty Name="QuickShip" ColumnName="QuickShip" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdRemitente" ColumnName="IdRemitente" />
+                <ScalarProperty Name="IdOrdenRetiro" ColumnName="IdOrdenRetiro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Piezas">
+            <EntityTypeMapping TypeName="PakBackEndModel.Piezas">
+              <MappingFragment StoreEntitySet="Piezas">
+                <ScalarProperty Name="IdOperativa" ColumnName="IdOperativa" />
+                <ScalarProperty Name="IdPPadreRetail" ColumnName="IdPPadreRetail" />
+                <ScalarProperty Name="IdEstadoRetail" ColumnName="IdEstadoRetail" />
+                <ScalarProperty Name="NombreReceptor" ColumnName="NombreReceptor" />
+                <ScalarProperty Name="Imp_QRemito" ColumnName="Imp_QRemito" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="IdPiezaPadre" ColumnName="IdPiezaPadre" />
+                <ScalarProperty Name="idRendicionAdminis" ColumnName="idRendicionAdminis" />
+                <ScalarProperty Name="IdRendicionOperativa" ColumnName="IdRendicionOperativa" />
+                <ScalarProperty Name="IdSucRendicion" ColumnName="IdSucRendicion" />
+                <ScalarProperty Name="IdSucTramitacion" ColumnName="IdSucTramitacion" />
+                <ScalarProperty Name="IdSucImposicion" ColumnName="IdSucImposicion" />
+                <ScalarProperty Name="FechaImposicion" ColumnName="FechaImposicion" />
+                <ScalarProperty Name="IdRemitente" ColumnName="IdRemitente" />
+                <ScalarProperty Name="Facturado" ColumnName="Facturado" />
+                <ScalarProperty Name="Seguro" ColumnName="Seguro" />
+                <ScalarProperty Name="PesoAforado" ColumnName="PesoAforado" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="NroCheque" ColumnName="NroCheque" />
+                <ScalarProperty Name="ImporteRemito" ColumnName="ImporteRemito" />
+                <ScalarProperty Name="NroRemito" ColumnName="NroRemito" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="FechaEstado" ColumnName="FechaEstado" />
+                <ScalarProperty Name="IdAccionOperativa" ColumnName="IdAccionOperativa" />
+                <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="IdAccion" ColumnName="IdAccion" />
+                <ScalarProperty Name="IdTipoServicio" ColumnName="IdTipoServicio" />
+                <ScalarProperty Name="PrecioEnvio" ColumnName="PrecioEnvio" />
+                <ScalarProperty Name="DiasEntrega" ColumnName="DiasEntrega" />
+                <ScalarProperty Name="PesoTotal" ColumnName="PesoTotal" />
+                <ScalarProperty Name="VolumenTotal" ColumnName="VolumenTotal" />
+                <ScalarProperty Name="CantidadPaquetes" ColumnName="CantidadPaquetes" />
+                <ScalarProperty Name="IdUltimoLogAccion" ColumnName="IdUltimoLogAccion" />
+                <ScalarProperty Name="NumeroEnvio" ColumnName="NumeroEnvio" />
+                <ScalarProperty Name="IdTipoEntrega" ColumnName="IdTipoEntrega" />
+                <ScalarProperty Name="IdOrdenRetiro" ColumnName="IdOrdenRetiro" />
+                <ScalarProperty Name="IdTipoPieza" ColumnName="IdTipoPieza" />
+                <ScalarProperty Name="IdDestinatario" ColumnName="IdDestinatario" />
+                <ScalarProperty Name="IdSucursalOCA" ColumnName="IdSucursalOCA" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="NroProducto" ColumnName="NroProducto" />
+                <ScalarProperty Name="IdPieza" ColumnName="IdPieza" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,6 +14,7 @@ namespace JanoService.Service
         PDF_ORIGINAL = 3,
         PDF_FIRMA = 4,
         MAIL = 5,
-        PDF_PAGINA_XY = 6
+        PDF_PAGINA_XY = 6,
+        TIPO_TRAMITEFORMULARY_TYPE = 8
     }
 }
