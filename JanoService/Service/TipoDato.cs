@@ -12,9 +12,10 @@ namespace JanoService.Service
         FOTO_DNI_FRENTE = 1,
         FOTO_DNI_DORSO = 2,
         PDF_ORIGINAL = 3,
-        PDF_FIRMA = 4,
+        FIRMA = 4,
         MAIL = 5,
         PDF_PAGINA_XY = 6,
+        PDF_FIRMADO = 7,
         TIPO_TRAMITEFORMULARY_TYPE = 8
     }
 }

@@ -15,7 +15,7 @@ namespace JanoService.Service
         volatile internal string pdfPath;
         volatile internal string pdfDestPath;
         volatile private object _lock = new object();
-        Regex coordsPattern = new Regex(@"(?:[\|]{0,1}(\d+)\:\[(\d+)\;(\d+)\;(\d+)\;(\d+)\])+");
+        Regex coordsPattern = new Regex(@"(?:[\|]{0,1}(\d+)\:(\d+)\;(\d+)\;(\d+)\;(\d+))+");
         internal void procesar()
         {
             lock (_lock)

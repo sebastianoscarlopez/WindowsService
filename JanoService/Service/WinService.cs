@@ -58,6 +58,7 @@ namespace JanoService.Service
             catch (Exception ex)
             {
                 Log.Error($"ERROR was unexpected: {ex.Message} \r\n\tSource:{ex.Source} \r\n\tStackTrace:{ex.StackTrace}");
+                start();
             }
         }
         void stop()
