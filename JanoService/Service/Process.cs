@@ -4,6 +4,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Linq;
 using System.IO;
+using System.Threading;
 
 namespace JanoService.Service
 {
@@ -61,6 +62,10 @@ namespace JanoService.Service
                                 var firmaPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.FIRMA)?.Valor;
                                 var firmaCoord = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_PAGINA_XY)?.Valor;
                                 var firmaCoords = firmaCoord?.Split(']');
+                                if (firmaCoords?.Length > 1)
+                                {
+                                    Array.Resize(ref firmaCoords, firmaCoords.Length - 1);
+                                }
                                 var pdfPathDest = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_FIRMADO);
                                 if ((pdfPathDest?.Valor ?? "").Length == 0)
                                 {
@@ -69,13 +74,12 @@ namespace JanoService.Service
                                         pdfPathDest.Valor = $"{pdfPath}PDF_FINAL\\";
                                         Directory.CreateDirectory(pdfPathDest.Valor);
                                         var idx = 1;
-                                        Array.Resize(ref firmaCoords, firmaCoords.Length - 1);
                                         foreach (var firma in firmaCoords)
                                         {
                                             new ProcesarPDF
                                             {
-                                                pdfPath = $"{pdfPath}{Pendiente.NroEnvio}_{idx}.pdf",
-                                                pdfDestPath = $"{pdfPathDest.Valor}{Pendiente.NroEnvio}_{idx++}.pdf",
+                                                pdfPath = $"{pdfPath}{Pendiente.NroEnvio}-{idx}.pdf",
+                                                pdfDestPath = $"{pdfPathDest.Valor}{Pendiente.NroEnvio}-{idx++}.pdf",
                                                 signed = firmaPath,
                                                 signedCoords = firma.Substring(1)
                                             }
@@ -105,8 +109,7 @@ namespace JanoService.Service
                                 foreach (var tipo in new TipoDato[] { TipoDato.PDF_FIRMADO, TipoDato.FOTO_DNI_FRENTE, TipoDato.FOTO_DNI_DORSO })
                                 {
                                     var dato = Pendiente.Datos.Find(p => p.TipoDato == tipo);
-                                    var path = dato?.Valor + (tipo == TipoDato.PDF_FIRMADO ? $"{Pendiente.NroEnvio}.pdf" : "");
-                                    if ((path ?? "").Length > 0)
+                                    if ((dato?.Valor ?? "").Length > 0)
                                     {
                                         if (dato.IdEstadoTramitacion == 2)
                                         {
@@ -116,15 +119,18 @@ namespace JanoService.Service
                                             var isUpload = true;
                                             if (tipo == TipoDato.PDF_FIRMADO)
                                             {
-                                                var cant = firmaCoords.Length;
-                                                while (cant-- > 0 && isUpload)
+                                                for(var cant = 1; cant <= firmaCoords.Length && isUpload; cant++)
                                                 {
-                                                    isUpload = upload.uploadFile($"{pdfPathDest.Valor}{Pendiente.NroEnvio}_{cant + 1}.pdf", TypeUpload.PDF, tipo);
+                                                    //upload = new UploadFiles(tramite, tipoTramite.Valor, Properties.Settings.Default.urlUpload, Properties.Settings.Default.urlToken);
+                                                    isUpload = upload.uploadFile($"{pdfPathDest.Valor}{Pendiente.NroEnvio}-{cant}.pdf", TypeUpload.PDF, tipo);
+                                                    Thread.Sleep(10000);
                                                 }
                                             }
                                             else
                                             {
-                                                isUpload = upload.uploadFile(path, TypeUpload.Image, tipo);
+                                                //upload = new UploadFiles(tramite, tipoTramite.Valor, Properties.Settings.Default.urlUpload, Properties.Settings.Default.urlToken);
+                                                isUpload = upload.uploadFile(dato.Valor, TypeUpload.Image, tipo);
+                                                Thread.Sleep(10000);
                                             }
                                             dato.FechaFin = DateTime.Now;
 
@@ -141,13 +147,13 @@ namespace JanoService.Service
                                             }
                                             if (!PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, dato))
                                             {
-                                                throw new Exception($"Process Upload {tipo} ERROR: {DateTime.Now} - {Pendiente.NroEnvio} - {path}");
+                                                throw new Exception($"Process Upload {tipo} ERROR: {DateTime.Now} - {Pendiente.NroEnvio}");
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        Log.Warn($"Process Upload {tipo} failed: {DateTime.Now} - {Pendiente.NroEnvio} - {path}");
+                                        Log.Warn($"Process Upload {tipo} failed: {DateTime.Now} - {Pendiente.NroEnvio}");
                                     }
                                 }
                                 Log.Info($"Process end: {DateTime.Now} - {Pendiente.NroEnvio}");

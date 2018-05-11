@@ -59,7 +59,6 @@ C:\desarrollo\git\JanoService\JanoService\bin\Debug\EntityFramework.dll
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\EntityFramework.SqlServer.dll
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\EntityFramework.xml
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\EntityFramework.SqlServer.xml
-C:\desarrollo\git\JanoService\JanoService\obj\Debug\JanoService.csprojResolveAssemblyReference.cache
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\BouncyCastle.Crypto.dll
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\itext.barcodes.dll
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\itext.forms.dll

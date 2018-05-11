@@ -26,6 +26,7 @@ namespace JanoService.Service
         public bool uploadFile(string filePath, TypeUpload typeUpload, TipoDato tipoDato)
         {
             string fileName = new FileInfo(filePath).Name;
+            var a = new FileInfo(filePath);
             var size = new FileInfo(filePath).Length;
             var httpForm = new HttpForm(urlUpload)
                             .SetHeader("x-ibm-client-id", "e9553aa7-b1cc-4fd2-a664-deaeb26543cc")
