@@ -63,6 +63,7 @@ namespace JanoService.Service
             //req.ContentType = contentType;
             //headers.Remove(contentType ?? "");
 
+            req.KeepAlive = false;
             req.Timeout = 30 * 1000;
             req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
             req.AllowAutoRedirect = false;
@@ -153,7 +154,6 @@ namespace JanoService.Service
                 }
 
                 var res = (HttpWebResponse)req.GetResponse();
-
                 return res;
             }
             catch (Exception ex)

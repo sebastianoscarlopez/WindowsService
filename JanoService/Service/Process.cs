@@ -57,107 +57,126 @@ namespace JanoService.Service
                                 }
                             }, () =>
                             {
-                                Log.Info($"Process Build signed PDF: {DateTime.Now} - {Pendiente.NroEnvio}");
-                                var pdfPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_ORIGINAL)?.Valor;
-                                var firmaPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.FIRMA)?.Valor;
-                                var firmaCoord = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_PAGINA_XY)?.Valor;
-                                var firmaCoords = firmaCoord?.Split(']');
-                                if (firmaCoords?.Length > 1)
-                                {
-                                    Array.Resize(ref firmaCoords, firmaCoords.Length - 1);
-                                }
-                                var pdfPathDest = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_FIRMADO);
-                                if ((pdfPathDest?.Valor ?? "").Length == 0)
-                                {
-                                    if ((pdfPath ?? "").Length > 0 && (firmaPath ?? "").Length > 0 && pdfPathDest != null && firmaCoords.Length > 1)
+                                try { 
+                                    Log.Info($"Process Build signed PDF: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                    var pdfPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_ORIGINAL)?.Valor;
+                                    var firmaPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.FIRMA)?.Valor;
+                                    var firmaCoord = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_PAGINA_XY)?.Valor;
+                                    var firmaCoords = firmaCoord?.Split(']');
+                                    if (firmaCoords?.Length > 1)
                                     {
-                                        pdfPathDest.Valor = $"{pdfPath}PDF_FINAL\\";
-                                        Directory.CreateDirectory(pdfPathDest.Valor);
-                                        var idx = 1;
-                                        foreach (var firma in firmaCoords)
+                                        Array.Resize(ref firmaCoords, firmaCoords.Length - 1);
+                                    }
+                                    var pdfPathDest = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_FIRMADO);
+                                    if ((pdfPathDest?.Valor ?? "").Length == 0)
+                                    {
+                                        if ((pdfPath ?? "").Length > 0 && (firmaPath ?? "").Length > 0 && pdfPathDest != null && firmaCoords.Length > 1)
                                         {
-                                            new ProcesarPDF
+                                            pdfPathDest.Valor = $"{pdfPath}PDF_FINAL\\";
+                                            Directory.CreateDirectory(pdfPathDest.Valor);
+                                            var idx = 1;
+                                            foreach (var firma in firmaCoords)
                                             {
-                                                pdfPath = $"{pdfPath}{Pendiente.NroEnvio}-{idx}.pdf",
-                                                pdfDestPath = $"{pdfPathDest.Valor}{Pendiente.NroEnvio}-{idx++}.pdf",
-                                                signed = firmaPath,
-                                                signedCoords = firma.Substring(1)
+                                                new ProcesarPDF
+                                                {
+                                                    pdfPath = $"{pdfPath}{Pendiente.NroEnvio}-{idx}.pdf",
+                                                    pdfDestPath = $"{pdfPathDest.Valor}{Pendiente.NroEnvio}-{idx++}.pdf",
+                                                    signed = firmaPath,
+                                                    signedCoords = firma.Substring(1)
+                                                }
+                                                .procesar();
                                             }
-                                            .procesar();
+                                            if (!PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, pdfPathDest))
+                                            {
+                                                Log.Warn($"Process update PDF_FINAL ERROR: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                                return;
+                                            }
                                         }
-                                        if (!PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, pdfPathDest))
+                                        else
                                         {
-                                            Log.Warn($"Process update PDF_FINAL ERROR: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                            Log.Warn($"Process sin datos para firma: {DateTime.Now} - {Pendiente.NroEnvio}");
                                             return;
                                         }
                                     }
-                                    else
+                                    var tramite = PendientesTramite.Instance.getTramite(Pendiente);
+                                    var tipoTramite = Pendiente.Datos.Where(d => d.TipoDato == TipoDato.TIPO_TRAMITEFORMULARY_TYPE).FirstOrDefault();
+                                    if (tramite == 0 || tipoTramite == null)
                                     {
-                                        Log.Warn($"Process sin datos para firma: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                        Log.Warn($"Process Upload sin dato de tramite: {DateTime.Now} - {Pendiente.NroEnvio}");
                                         return;
                                     }
-                                }
-                                var tramite = PendientesTramite.Instance.getTramite(Pendiente);
-                                var tipoTramite = Pendiente.Datos.Where(d => d.TipoDato == TipoDato.TIPO_TRAMITEFORMULARY_TYPE).FirstOrDefault();
-                                if (tramite == 0 || tipoTramite == null)
-                                {
-                                    Log.Warn($"Process Upload sin dato de tramite: {DateTime.Now} - {Pendiente.NroEnvio}");
-                                    return;
-                                }
-                                Log.Info($"Process Upload dni photos and signed pdf: {DateTime.Now} - {Pendiente.NroEnvio}");
-                                var upload = new UploadFiles(tramite, tipoTramite.Valor, Properties.Settings.Default.urlUpload, Properties.Settings.Default.urlToken);
-                                foreach (var tipo in new TipoDato[] { TipoDato.PDF_FIRMADO, TipoDato.FOTO_DNI_FRENTE, TipoDato.FOTO_DNI_DORSO })
-                                {
-                                    var dato = Pendiente.Datos.Find(p => p.TipoDato == tipo);
-                                    if ((dato?.Valor ?? "").Length > 0)
+                                    Log.Info($"Process Upload dni photos and signed pdf: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                    var upload = new ApiJanoService(tramite, tipoTramite.Valor);
+                                    var cantPendienteEnviar = 3;
+                                    foreach (var tipo in new TipoDato[] { TipoDato.PDF_FIRMADO, TipoDato.FOTO_DNI_FRENTE, TipoDato.FOTO_DNI_DORSO })
                                     {
-                                        if (dato.IdEstadoTramitacion == 2)
+                                        var dato = Pendiente.Datos.Find(p => p.TipoDato == tipo);
+                                        if ((dato?.Valor ?? "").Length > 0)
                                         {
-                                            dato.FechaEnvio = DateTime.Now;
-                                            dato.CantidadReintentos++;
-                                            PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, dato);
-                                            var isUpload = true;
-                                            if (tipo == TipoDato.PDF_FIRMADO)
+                                            if (dato.IdEstadoTramitacion == 2)
                                             {
-                                                for(var cant = 1; cant <= firmaCoords.Length && isUpload; cant++)
+                                                dato.FechaEnvio = DateTime.Now;
+                                                dato.CantidadReintentos++;
+                                                if(!PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, dato))
                                                 {
-                                                    //upload = new UploadFiles(tramite, tipoTramite.Valor, Properties.Settings.Default.urlUpload, Properties.Settings.Default.urlToken);
-                                                    isUpload = upload.uploadFile($"{pdfPathDest.Valor}{Pendiente.NroEnvio}-{cant}.pdf", TypeUpload.PDF, tipo);
+                                                    Log.Warn($"Process Upload {tipo} failed when was trying to update: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                                    return;
+                                                }
+                                                var isUpload = true;
+                                                if (tipo == TipoDato.PDF_FIRMADO)
+                                                {
+                                                    for(var cant = 1; cant <= firmaCoords.Length && isUpload; cant++)
+                                                    {
+                                                        Log.Info($"Process Upload {tipo}: {DateTime.Now} - {Pendiente.NroEnvio} - {cant}");
+                                                        isUpload = upload.UploadFile($"{pdfPathDest.Valor}{Pendiente.NroEnvio}-{cant}.pdf", TypeUpload.PDF, tipo);
+                                                        Thread.Sleep(10000);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    Log.Info($"Process Upload {tipo}: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                                    isUpload = upload.UploadFile(dato.Valor, TypeUpload.Image, tipo);
                                                     Thread.Sleep(10000);
                                                 }
-                                            }
-                                            else
-                                            {
-                                                //upload = new UploadFiles(tramite, tipoTramite.Valor, Properties.Settings.Default.urlUpload, Properties.Settings.Default.urlToken);
-                                                isUpload = upload.uploadFile(dato.Valor, TypeUpload.Image, tipo);
-                                                Thread.Sleep(10000);
-                                            }
-                                            dato.FechaFin = DateTime.Now;
+                                                dato.FechaFin = DateTime.Now;
 
-                                            if (isUpload)
-                                            {
-                                                dato.IdEstadoTramitacion = 1;
-                                            }
-                                            else
-                                            {
-                                                if (dato.CantidadReintentos > Properties.Settings.Default.MaxRetries)
+                                                if (isUpload)
                                                 {
-                                                    dato.IdEstadoTramitacion = 3;
+                                                    dato.IdEstadoTramitacion = 1;
                                                 }
-                                            }
-                                            if (!PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, dato))
+                                                else
+                                                {
+                                                    if (dato.CantidadReintentos > Properties.Settings.Default.MaxRetries)
+                                                    {
+                                                        dato.IdEstadoTramitacion = 3;
+                                                    }
+                                                }
+                                                if (!PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, dato))
+                                                {
+                                                    throw new Exception($"Process Upload {tipo} ERROR: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                                }
+                                            }else
                                             {
-                                                throw new Exception($"Process Upload {tipo} ERROR: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                                cantPendienteEnviar--;
                                             }
                                         }
+                                        else
+                                        {
+                                            Log.Warn($"Process Upload {tipo} failed: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                        }
                                     }
-                                    else
+                                    if (cantPendienteEnviar==0)
                                     {
-                                        Log.Warn($"Process Upload {tipo} failed: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                        Log.Info($"Process Upload end: {DateTime.Now} - {Pendiente.NroEnvio}");
                                     }
+
+                                    Log.Info($"Process end: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                    Console.WriteLine($"pendiente:{Pendiente.NroEnvio}");
                                 }
-                                Log.Info($"Process end: {DateTime.Now} - {Pendiente.NroEnvio}");
-                                Console.WriteLine($"pendiente:{Pendiente.NroEnvio}");
+                                catch (Exception ex)
+                                {
+                                    Log.Error($"Error: {ex.Message} \r\n\tSource:{ex.Source} \r\n\tStackTrace:{ex.StackTrace}");
+                                }
                             });
                     }
                     catch (Exception ex)

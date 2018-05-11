@@ -75,3 +75,4 @@ C:\desarrollo\git\JanoService\JanoService\bin\Debug\itext.kernel.xml
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\itext.layout.xml
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\itext.pdfa.xml
 C:\desarrollo\git\JanoService\JanoService\bin\Debug\itext.sign.xml
+C:\desarrollo\git\JanoService\JanoService\obj\Debug\JanoService.csprojResolveAssemblyReference.cache

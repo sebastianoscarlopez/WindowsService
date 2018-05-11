@@ -52,16 +52,23 @@ namespace JanoService.Service
                     {
                         var dato = t.Datos.Where(d => d.TipoDato == TipoDato.TIPO_TRAMITEFORMULARY_TYPE).FirstOrDefault();
                         int id;
-                        if (dato!= null && int.TryParse(dato.Valor, out id))
+                        if (dato!= null && dato.IdEstadoTramitacion==2 && int.TryParse(dato.Valor, out id))
                         {
                             dato.Valor = (from f in context.AppDistribuidores_TiposFormulariosJANO
                                           where f.IdTipoFormularioJANO == id
                                           select f.CodigoJANO
                                           ).Single();
                         }
+                        if(dato?.Valor == null || dato.IdEstadoTramitacion != 2)
+                        {
+                            t.IdPieza = 0;
+                        }
                     }
 
-                    return tramitaciones.ToObservable();
+                    return tramitaciones
+                        .Where(t=>t.IdPieza>0)
+                        .ToList()
+                        .ToObservable();
                 }
             }
             catch (Exception ex)

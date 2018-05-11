@@ -32,5 +32,8 @@
     <Setting Name="urlToken" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://api.movistar.com.ar/telefonica/sandbox/v1/oauth2/token</Value>
     </Setting>
+    <Setting Name="urlUploadEnd" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">urlUploadEndhttps://api.movistar.com.ar/telefonica/sandbox/documentProcessManagement/v1/documentProcess/4100748152018/uploadedStatus</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

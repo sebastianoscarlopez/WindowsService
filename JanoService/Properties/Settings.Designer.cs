@@ -113,5 +113,15 @@ namespace JanoService.Properties {
                 return ((string)(this["urlToken"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("urlUploadEndhttps://api.movistar.com.ar/telefonica/sandbox/documentProcessManagem" +
+            "ent/v1/documentProcess/4100748152018/uploadedStatus")]
+        public string urlUploadEnd {
+            get {
+                return ((string)(this["urlUploadEnd"]));
+            }
+        }
     }
 }
