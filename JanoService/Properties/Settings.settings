@@ -35,5 +35,17 @@
     <Setting Name="urlUploadEnd" Type="System.String" Scope="Application">
       <Value Profile="(Default)">urlUploadEndhttps://api.movistar.com.ar/telefonica/sandbox/documentProcessManagement/v1/documentProcess/4100748152018/uploadedStatus</Value>
     </Setting>
+    <Setting Name="clientID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">e9553aa7-b1cc-4fd2-a664-deaeb26543cc</Value>
+    </Setting>
+    <Setting Name="clientSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">oX5fP5kH7uK1uV2fF7sX0qK3qF3oI6wX4jV5yX7gT5hK1dW4eG</Value>
+    </Setting>
+    <Setting Name="scope" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">scope1</Value>
+    </Setting>
+    <Setting Name="grant_type" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">client_credentials</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

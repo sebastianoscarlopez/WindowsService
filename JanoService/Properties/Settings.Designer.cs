@@ -123,5 +123,41 @@ namespace JanoService.Properties {
                 return ((string)(this["urlUploadEnd"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("e9553aa7-b1cc-4fd2-a664-deaeb26543cc")]
+        public string clientID {
+            get {
+                return ((string)(this["clientID"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("oX5fP5kH7uK1uV2fF7sX0qK3qF3oI6wX4jV5yX7gT5hK1dW4eG")]
+        public string clientSecret {
+            get {
+                return ((string)(this["clientSecret"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("scope1")]
+        public string scope {
+            get {
+                return ((string)(this["scope"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("client_credentials")]
+        public string grant_type {
+            get {
+                return ((string)(this["grant_type"]));
+            }
+        }
     }
 }

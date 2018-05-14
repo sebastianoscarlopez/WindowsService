@@ -36,7 +36,8 @@ namespace JanoService.Service
                             .SubscribeOn(CurrentThreadScheduler.Instance)
                             .Subscribe(ArchivoThuban =>
                             {
-                                Log.Info($"Process Copy file from Thuban to path destination: {DateTime.Now} - {Pendiente.NroEnvio} - {pathFind}");
+                                #region Copy files from Thuban to path destination
+                                Log.Info($"Process Copy files from Thuban to path destination: {DateTime.Now} - {Pendiente.NroEnvio} - {pathFind}");
                                 if (new[] { TipoDato.FOTO_DNI_FRENTE, TipoDato.FOTO_DNI_DORSO, TipoDato.FIRMA }.Contains(ArchivoThuban.Tipo)
                                         && Pendiente.Datos.Where(pd => pd.TipoDato == ArchivoThuban.Tipo).SingleOrDefault()?.Valor.Length == 0)
                                 {
@@ -55,9 +56,11 @@ namespace JanoService.Service
                                     dato.Valor = destino;
                                     PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, dato);
                                 }
+                                #endregion
                             }, () =>
                             {
-                                try { 
+                                try {
+                                    #region Build signed PDF
                                     Log.Info($"Process Build signed PDF: {DateTime.Now} - {Pendiente.NroEnvio}");
                                     var pdfPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_ORIGINAL)?.Valor;
                                     var firmaPath = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.FIRMA)?.Valor;
@@ -105,6 +108,8 @@ namespace JanoService.Service
                                         Log.Warn($"Process Upload sin dato de tramite: {DateTime.Now} - {Pendiente.NroEnvio}");
                                         return;
                                     }
+                                    #endregion
+                                    #region Upload dni photos and signed pdf
                                     Log.Info($"Process Upload dni photos and signed pdf: {DateTime.Now} - {Pendiente.NroEnvio}");
                                     var upload = new ApiJanoService(tramite, tipoTramite.Valor);
                                     var cantPendienteEnviar = 3;
@@ -165,11 +170,29 @@ namespace JanoService.Service
                                             Log.Warn($"Process Upload {tipo} failed: {DateTime.Now} - {Pendiente.NroEnvio}");
                                         }
                                     }
+                                    #endregion
+                                    return;
+                                    #region Upload end
                                     if (cantPendienteEnviar==0)
                                     {
                                         Log.Info($"Process Upload end: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                        var correo = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.MAIL)?.Valor ?? "";
+                                        if (!upload.UploadFileEnd(correo))
+                                        {
+                                            throw new Exception($"Process Upload end ERROR: {DateTime.Now} - {Pendiente.NroEnvio}");
+                                        }
+                                        #region Remove from pending
+                                        foreach (var d in Pendiente.Datos)
+                                        {
+                                            if (d.IdEstadoTramitacion == 2)
+                                            {
+                                                d.IdEstadoTramitacion = 1;
+                                                PendientesTramite.Instance.UpdateDato(Pendiente.IdPieza, d);
+                                            }
+                                        }
+                                        #endregion
                                     }
-
+                                    #endregion
                                     Log.Info($"Process end: {DateTime.Now} - {Pendiente.NroEnvio}");
                                     Console.WriteLine($"pendiente:{Pendiente.NroEnvio}");
                                 }

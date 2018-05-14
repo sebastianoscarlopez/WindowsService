@@ -56,80 +56,44 @@ namespace JanoService.Service
 
             var response = httpForm.Submit();
             return response.StatusCode == HttpStatusCode.OK;
-        }/*
-        public bool UploadEnd()
-        {
-
-            string url = urlToken;
-            string clientID = @"e9553aa7-b1cc-4fd2-a664-deaeb26543cc";
-            string clientSecret = @"oX5fP5kH7uK1uV2fF7sX0qK3qF3oI6wX4jV5yX7gT5hK1dW4eG";
-            string scope = "scope1";
-
-            StringBuilder data = new StringBuilder();
-            data.Append("grant_type=client_credentials");
-            data.Append($"&client_id={clientID}");
-            data.Append($"&client_secret={clientSecret}");
-            data.Append($"&scope={scope}");
-            byte[] byteArray = Encoding.UTF8.GetBytes(data.ToString());
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Accept = "application/json";
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = byteArray.Length;
-            Stream postStream = request.GetRequestStream();
-            postStream.Write(byteArray, 0, byteArray.Length);
-            postStream.Close();
-            var response = (HttpWebResponse)request.GetResponse();
-            var streamReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            var respuesta = streamReader.ReadToEnd();
-            return new Regex("\"access_token\":\"([^\"]+)\"").Match(respuesta).Groups[1].Captures[0].Value;
-        }*/
-        public string getToken()
-        {
-            string url = urlToken;
-            string clientID = @"e9553aa7-b1cc-4fd2-a664-deaeb26543cc";
-            string clientSecret = @"oX5fP5kH7uK1uV2fF7sX0qK3qF3oI6wX4jV5yX7gT5hK1dW4eG";
-            string scope = "scope1";
-
-            StringBuilder data = new StringBuilder();
-            data.Append("grant_type=client_credentials");
-            data.Append($"&client_id={clientID}");
-            data.Append($"&client_secret={clientSecret}");
-            data.Append($"&scope={scope}");
-            byte[] byteArray = Encoding.UTF8.GetBytes(data.ToString());
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Accept = "application/json";
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = byteArray.Length;
-            Stream postStream = request.GetRequestStream();
-            postStream.Write(byteArray, 0, byteArray.Length);
-            postStream.Close();
-            var response = (HttpWebResponse)request.GetResponse();
-            var streamReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            var respuesta = streamReader.ReadToEnd();
-            return new Regex("\"access_token\":\"([^\"]+)\"").Match(respuesta).Groups[1].Captures[0].Value;
         }
-
         public bool UploadFileEnd(string correo)
         {
-            string url = urlToken;
-            string clientID = @"e9553aa7-b1cc-4fd2-a664-deaeb26543cc";
-            string clientSecret = @"oX5fP5kH7uK1uV2fF7sX0qK3qF3oI6wX4jV5yX7gT5hK1dW4eG";
-            string scope = "scope1";
-
             StringBuilder data = new StringBuilder();
             data.Append($@"{{
-                  ""orderActionId"": {tramite.ToString().Substring(0, tramite.ToString().Length-4)},
+                  ""orderActionId"": {tramite.ToString().Substring(0, tramite.ToString().Length - 4)},
                   ""formularyType"": ""{tipoTramite}"",
                   ""email"": ""{correo}"",
                   ""observations"": """",
                   ""isQRValid"": true
                 }}");
             byte[] byteArray = Encoding.UTF8.GetBytes(data.ToString());
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlUploadEnd);
+            request.Headers["x-ibm-client-id"] = Properties.Settings.Default.clientID;
+            request.Headers["Authorization"] = $"Bearer {token}";
             request.Accept = "application/json";
             request.Method = "PUT";
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+            Stream postStream = request.GetRequestStream();
+            postStream.Write(byteArray, 0, byteArray.Length);
+            postStream.Close();
+            var response = (HttpWebResponse)request.GetResponse();
+            var streamReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            var respuesta = streamReader.ReadToEnd();
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+        public string getToken()
+        {
+            StringBuilder data = new StringBuilder();
+            data.Append($"grant_type={Properties.Settings.Default.grant_type}");
+            data.Append($"&client_id={Properties.Settings.Default.clientID}");
+            data.Append($"&client_secret={Properties.Settings.Default.clientSecret}");
+            data.Append($"&scope={Properties.Settings.Default.scope}");
+            byte[] byteArray = Encoding.UTF8.GetBytes(data.ToString());
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlToken);
+            request.Accept = "application/json";
+            request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = byteArray.Length;
             Stream postStream = request.GetRequestStream();
@@ -140,5 +104,6 @@ namespace JanoService.Service
             var respuesta = streamReader.ReadToEnd();
             return new Regex("\"access_token\":\"([^\"]+)\"").Match(respuesta).Groups[1].Captures[0].Value;
         }
+
     }
 }
