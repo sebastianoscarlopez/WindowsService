@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace JanoService.Service
 {
+    /// <summary>
+    /// AppDistribuidores_DatosAdicionalesTramitaciones DTO
+    /// </summary>
     public class PendienteDato
     {
         public TipoDato TipoDato { get; set; }

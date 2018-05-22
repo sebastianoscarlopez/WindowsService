@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace JanoService.Service
 {
+    /// <summary>
+    /// Jano api's interactor 
+    /// </summary>
     public class ApiJanoService
     {
         private long tramite;
@@ -16,6 +19,11 @@ namespace JanoService.Service
         private readonly string urlToken;
         private readonly string tipoTramite;
         private readonly string token;
+        /// <summary>
+        /// Prepare object who must be ready for api
+        /// </summary>
+        /// <param name="tramite">producto + fecha carga</param>
+        /// <param name="tipoTramite">Value from table AppDistribuidores_TiposFormulariosJANO</param>
         public ApiJanoService(long tramite, string tipoTramite)
         {
             this.tramite = tramite;
@@ -25,6 +33,13 @@ namespace JanoService.Service
             urlToken = Properties.Settings.Default.urlToken;
             token = getToken();
         }
+        /// <summary>
+        /// Photo dni or pdf upload
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <param name="typeUpload">Defined by Jano documentation</param>
+        /// <param name="tipoDato">Must be FOTO_DNI_FRENTE, FOTO_DNI_DORSO or PDF_FIRMADO</param>
+        /// <returns>True whether server return 200</returns>
         public bool UploadFile(string filePath, TypeUpload typeUpload, TipoDato tipoDato)
         {
             string fileName = new FileInfo(filePath).Name;
@@ -57,18 +72,25 @@ namespace JanoService.Service
             var response = httpForm.Submit();
             return response.StatusCode == HttpStatusCode.OK;
         }
-        public bool UploadFileEnd(string correo)
+        /// <summary>
+        /// Una vez terminado de subir el dni y el pdf firmado, se utiliza este metodo para indicar a TEF que se finalizo.
+        /// </summary>
+        /// <param name="email">Email from table AppDistribuidores_DatosAdicionalesTramitaciones when IdTipoDato = 5</param>
+        /// <param name="tramite">nroProducto from table piezas</param>
+        /// <param name="year">FechaCarga from tableOrdenRetiro</param>
+        /// <returns>True whether server return 200</returns>
+        public bool UploadFileEnd(string email, long tramite, long year)
         {
             StringBuilder data = new StringBuilder();
             data.Append($@"{{
-                  ""orderActionId"": {tramite.ToString().Substring(0, tramite.ToString().Length - 4)},
+                  ""orderActionId"": {tramite},
                   ""formularyType"": ""{tipoTramite}"",
-                  ""email"": ""{correo}"",
+                  ""email"": ""{email}"",
                   ""observations"": """",
                   ""isQRValid"": true
                 }}");
             byte[] byteArray = Encoding.UTF8.GetBytes(data.ToString());
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlUploadEnd);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format(urlUploadEnd, tramite, year));
             request.Headers["x-ibm-client-id"] = Properties.Settings.Default.clientID;
             request.Headers["Authorization"] = $"Bearer {token}";
             request.Accept = "application/json";
@@ -83,6 +105,10 @@ namespace JanoService.Service
             var respuesta = streamReader.ReadToEnd();
             return response.StatusCode == HttpStatusCode.OK;
         }
+        /// <summary>
+        /// Get token by OAuth2
+        /// </summary>
+        /// <returns>Token</returns>
         public string getToken()
         {
             StringBuilder data = new StringBuilder();
@@ -104,6 +130,5 @@ namespace JanoService.Service
             var respuesta = streamReader.ReadToEnd();
             return new Regex("\"access_token\":\"([^\"]+)\"").Match(respuesta).Groups[1].Captures[0].Value;
         }
-
     }
 }

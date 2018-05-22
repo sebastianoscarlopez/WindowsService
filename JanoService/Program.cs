@@ -11,6 +11,9 @@ using JanoService;
 /// </summary>
 namespace JanoService
 {
+    /// <summary>
+    /// Its uses topshell for easy windows service development
+    /// </summary>
     class Program
     {
         static void Main(string[] args)

@@ -7,6 +7,9 @@ using System.Text;
 
 namespace JanoService.Service
 {
+    /// <summary>
+    /// Used for decoupled post call to api
+    /// </summary>
     public class HttpForm
     {
 
@@ -20,42 +23,61 @@ namespace JanoService.Service
             this.Method = "POST";
         }
 
-        public string Method { get; set; }
-        public string Url { get; set; }
+        private string Method { get; set; }
+        private string Url { get; set; }
 
         //return self so that we can chain
+        /// <summary>
+        /// Add file to upload
+        /// </summary>
+        /// <param name="field">Name for data</param>
+        /// <param name="fileName">Name of file to upload</param>
+        /// <returns>self so that can be chained</returns>
         public HttpForm AttachFile(string field, string fileName)
         {
             _files[field] = fileName;
             return this;
         }
-
-        public HttpForm ResetForm()
-        {
-            _files.Clear();
-            _values.Clear();
-            return this;
-        }
-
-        //return self so that we can chain
+        
+        /// <summary>
+        /// Add values to mimepart
+        /// </summary>
+        /// <param name="field">Name for data</param>
+        /// <param name="value">Data</param>
+        /// <returns>self so that can be chained</returns>
         public HttpForm SetValue(string field, string value)
         {
             _values[field] = value;
             return this;
         }
 
+        /// <summary>
+        /// Add values to headers, this must not include contentType
+        /// </summary>
+        /// <param name="field">Name for data</param>
+        /// <param name="value">Data</param>
+        /// <returns>self so that can be chained</returns>
         public HttpForm SetHeader(string field, string value)
         {
             _headers[field] = value;
             return this;
         }
-
+        /// <summary>
+        /// Make de request
+        /// </summary>
+        /// <returns>Response from server</returns>
         public HttpWebResponse Submit()
         {
             return this.UploadFiles(_files, _values, _headers);
         }
 
-
+        /// <summary>
+        /// Upload of files adapted for Jano api, don't call directly
+        /// </summary>
+        /// <param name="files">List of files to upload</param>
+        /// <param name="otherValues">Use SetValue for add to this</param>
+        /// <param name="headers">Use SetHeader for add this, doesn't include contentType</param>
+        /// <returns>The response from server</returns>
         private HttpWebResponse UploadFiles(Dictionary<string, string> files, Dictionary<string, string> otherValues, Dictionary<string, string> headers)
         {
             var req = (HttpWebRequest)WebRequest.Create(this.Url);
@@ -166,7 +188,9 @@ namespace JanoService.Service
                 return (HttpWebResponse)req.GetResponse();
             }
         }
-
+        /// <summary>
+        /// Used this internal class for every part in request
+        /// </summary>
         private class MimePart
         {
             private NameValueCollection _headers = new NameValueCollection();

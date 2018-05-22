@@ -52,37 +52,10 @@ namespace JanoService.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\")]
-        public string PathFind {
-            get {
-                return ((string)(this["PathFind"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("RunAsLocalService")]
         public string Authentication {
             get {
                 return ((string)(this["Authentication"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00:00:03")]
-        public global::System.TimeSpan TimeScheduled {
-            get {
-                return ((global::System.TimeSpan)(this["TimeScheduled"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\De002ap\\app_distribuidores_pdf\\FOTOS_THUBAN\\")]
-        public string PathReplace {
-            get {
-                return ((string)(this["PathReplace"]));
             }
         }
         
@@ -111,16 +84,6 @@ namespace JanoService.Properties {
         public string urlToken {
             get {
                 return ((string)(this["urlToken"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("urlUploadEndhttps://api.movistar.com.ar/telefonica/sandbox/documentProcessManagem" +
-            "ent/v1/documentProcess/4100748152018/uploadedStatus")]
-        public string urlUploadEnd {
-            get {
-                return ((string)(this["urlUploadEnd"]));
             }
         }
         
@@ -157,6 +120,43 @@ namespace JanoService.Properties {
         public string grant_type {
             get {
                 return ((string)(this["grant_type"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F:\\ThubanFS\\DISTRIBUCION\\")]
+        public string PathFind {
+            get {
+                return ((string)(this["PathFind"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:30:00")]
+        public global::System.TimeSpan TimeScheduled {
+            get {
+                return ((global::System.TimeSpan)(this["TimeScheduled"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\Ap001xex\\F_DISTRIBUCION\\")]
+        public string PathReplace {
+            get {
+                return ((string)(this["PathReplace"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.movistar.com.ar/telefonica/sandbox/documentProcessManagement/v1/docum" +
+            "entProcess/{0}{1}/uploadedStatus")]
+        public string urlUploadEnd {
+            get {
+                return ((string)(this["urlUploadEnd"]));
             }
         }
     }

@@ -8,13 +8,23 @@ using System.Threading;
 
 namespace JanoService.Service
 {
+    /// <summary>
+    /// Make coordinated work by steps
+    /// </summary>
     public class Process
     {
         private readonly ILog Log;
+        /// <summary>
+        /// Just assign log using ninject
+        /// </summary>
+        /// <param name="log">Is Log4net passed by ninject</param>
         public Process(ILog log)
         {
             Log = log;
         }
+        /// <summary>
+        /// All job is inside this method, maybe would be separated for better in files. Just uses region, but its work.
+        /// </summary>
         internal void run()
         {
             Log.Info($"Process start: { DateTime.Now}");
@@ -44,12 +54,12 @@ namespace JanoService.Service
                                     var origen = ArchivoThuban.Ruta.Replace(pathFind, pathReplace);
                                     var carpeta = ArchivoThuban.Tipo == TipoDato.FIRMA
                                         ? "FIRMA"
-                                        : "FOTO";
-                                    var archivo = $"{ArchivoThuban.Archivo}.{ArchivoThuban.Extencion}";
+                                        : "FOTOS";
+                                    var archivo = $"{ArchivoThuban.Archivo}";
                                     var destino = $"{pathDestination}{ArchivoThuban.Guia}\\{carpeta}\\";
                                     Directory.CreateDirectory(destino);
-                                    destino += archivo;
-                                    File.Copy($"{origen}{archivo}", destino, true);
+                                    destino += $"{archivo}.{ArchivoThuban.Extencion}";
+                                    File.Copy($@"{origen}{archivo}", destino, true);
 
                                     // Update AppDistribuidores_DatosAdicionalesTramitaciones table
                                     var dato = Pendiente.Datos.Find(p => p.TipoDato == ArchivoThuban.Tipo);
@@ -73,17 +83,17 @@ namespace JanoService.Service
                                     var pdfPathDest = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.PDF_FIRMADO);
                                     if ((pdfPathDest?.Valor ?? "").Length == 0)
                                     {
-                                        if ((pdfPath ?? "").Length > 0 && (firmaPath ?? "").Length > 0 && pdfPathDest != null && firmaCoords.Length > 1)
+                                        if ((pdfPath ?? "").Length > 0 && (firmaPath ?? "").Length > 0 && pdfPathDest != null && firmaCoords.Length > 0)
                                         {
-                                            pdfPathDest.Valor = $"{pdfPath}PDF_FINAL\\";
+                                            pdfPathDest.Valor = $@"{pdfPath}\PDF_FINAL";
                                             Directory.CreateDirectory(pdfPathDest.Valor);
                                             var idx = 1;
                                             foreach (var firma in firmaCoords)
                                             {
                                                 new ProcesarPDF
                                                 {
-                                                    pdfPath = $"{pdfPath}{Pendiente.NroEnvio}-{idx}.pdf",
-                                                    pdfDestPath = $"{pdfPathDest.Valor}{Pendiente.NroEnvio}-{idx++}.pdf",
+                                                    pdfPath = $@"{pdfPath}\{Pendiente.NroEnvio}-{idx}.pdf",
+                                                    pdfDestPath = $@"{pdfPathDest.Valor}\{Pendiente.NroEnvio}-{idx++}.pdf",
                                                     signed = firmaPath,
                                                     signedCoords = firma.Substring(1)
                                                 }
@@ -103,7 +113,7 @@ namespace JanoService.Service
                                     }
                                     var tramite = PendientesTramite.Instance.getTramite(Pendiente);
                                     var tipoTramite = Pendiente.Datos.Where(d => d.TipoDato == TipoDato.TIPO_TRAMITEFORMULARY_TYPE).FirstOrDefault();
-                                    if (tramite == 0 || tipoTramite == null)
+                                    if (tramite.Length != 2 || tramite[0] == 0 || tramite[1] == 0 || tipoTramite == null)
                                     {
                                         Log.Warn($"Process Upload sin dato de tramite: {DateTime.Now} - {Pendiente.NroEnvio}");
                                         return;
@@ -111,7 +121,7 @@ namespace JanoService.Service
                                     #endregion
                                     #region Upload dni photos and signed pdf
                                     Log.Info($"Process Upload dni photos and signed pdf: {DateTime.Now} - {Pendiente.NroEnvio}");
-                                    var upload = new ApiJanoService(tramite, tipoTramite.Valor);
+                                    var upload = new ApiJanoService(tramite[0]*10000+tramite[1], tipoTramite.Valor);
                                     var cantPendienteEnviar = 3;
                                     foreach (var tipo in new TipoDato[] { TipoDato.PDF_FIRMADO, TipoDato.FOTO_DNI_FRENTE, TipoDato.FOTO_DNI_DORSO })
                                     {
@@ -133,7 +143,7 @@ namespace JanoService.Service
                                                     for(var cant = 1; cant <= firmaCoords.Length && isUpload; cant++)
                                                     {
                                                         Log.Info($"Process Upload {tipo}: {DateTime.Now} - {Pendiente.NroEnvio} - {cant}");
-                                                        isUpload = upload.UploadFile($"{pdfPathDest.Valor}{Pendiente.NroEnvio}-{cant}.pdf", TypeUpload.PDF, tipo);
+                                                        isUpload = upload.UploadFile($"{pdfPathDest.Valor}\\{Pendiente.NroEnvio}-{cant}.pdf", TypeUpload.PDF, tipo);
                                                         Thread.Sleep(10000);
                                                     }
                                                 }
@@ -148,6 +158,7 @@ namespace JanoService.Service
                                                 if (isUpload)
                                                 {
                                                     dato.IdEstadoTramitacion = 1;
+                                                    cantPendienteEnviar--;
                                                 }
                                                 else
                                                 {
@@ -171,13 +182,13 @@ namespace JanoService.Service
                                         }
                                     }
                                     #endregion
-                                    return;
+                                    //return;
                                     #region Upload end
                                     if (cantPendienteEnviar==0)
                                     {
                                         Log.Info($"Process Upload end: {DateTime.Now} - {Pendiente.NroEnvio}");
-                                        var correo = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.MAIL)?.Valor ?? "";
-                                        if (!upload.UploadFileEnd(correo))
+                                        var email = Pendiente.Datos.Find(p => p.TipoDato == TipoDato.MAIL)?.Valor ?? "";
+                                        if (!upload.UploadFileEnd(email, tramite[0], tramite[1]))
                                         {
                                             throw new Exception($"Process Upload end ERROR: {DateTime.Now} - {Pendiente.NroEnvio}");
                                         }
@@ -213,7 +224,7 @@ namespace JanoService.Service
                 {
                     Console.WriteLine($"ultimo pendiente");
                 });
-            Log.Info($"Process end: { DateTime.Now}");
+            Log.Info($"Process end: {DateTime.Now}");
         }
     }
 }

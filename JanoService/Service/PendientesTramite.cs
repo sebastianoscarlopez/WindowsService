@@ -7,11 +7,15 @@ namespace JanoService.Service
 {
     /// <summary>
     /// Parcel with process pending
+    /// It's a singleton class
     /// </summary>
     public class PendientesTramite
     {
         static readonly PendientesTramite instance = new PendientesTramite();
         private PendientesTramite() { }
+        /// <summary>
+        /// Get instance, it's singleton class
+        /// </summary>
         static public PendientesTramite Instance
         {
             get
@@ -19,6 +23,10 @@ namespace JanoService.Service
                 return instance;
             }
         }
+        /// <summary>
+        /// Get Pendientes to process
+        /// </summary>
+        /// <returns>Items to be emmited during process</returns>
         public IObservable<Pendiente> GetPendientes()
         {
             try
@@ -28,13 +36,12 @@ namespace JanoService.Service
                 {
                     var tramitaciones = (from t in context.AppDistribuidores_Tramitaciones
                                          join dt in context.AppDistribuidores_DatosAdicionalesTramitaciones on t.IdTramitacion equals dt.IdTramitacion
-                                         where t.IdSistema == 1 && dt.CantidadReintentos <= maxRetries && t.NroEnvio > 0
+                                         where t.IdSistema == 1 && dt.CantidadReintentos <= maxRetries
                                          group dt by t into gt
                                          select new Pendiente
                                          {
                                              IdTramitacion = gt.Key.IdTramitacion,
                                              IdPieza = gt.Key.IdPieza,
-                                             NroEnvio = gt.Key.NroEnvio ?? 0,
                                              Datos = (from d in gt
                                                       where d.IdTipoDato != (int)TipoDato.MAIL
                                                       select new PendienteDato
@@ -63,6 +70,12 @@ namespace JanoService.Service
                         {
                             t.IdPieza = 0;
                         }
+                        if(t.IdPieza > 0)
+                        {
+                            t.NroEnvio = long.Parse((from p in context.Piezas
+                                          where p.IdPieza == t.IdPieza
+                                          select p.NumeroEnvio).Single());
+                        }
                     }
 
                     return tramitaciones
@@ -80,7 +93,12 @@ namespace JanoService.Service
                 });
             }
         }
-        public long getTramite(Pendiente pendiente)
+        /// <summary>
+        /// Tramite data is lazy obtained
+        /// </summary>
+        /// <param name="pendiente"></param>
+        /// <returns>Producto and FechaCarga</returns>
+        public long[] getTramite(Pendiente pendiente)
         {
             using (var context = new Data.PakBackEndEntities())
             {
@@ -89,9 +107,15 @@ namespace JanoService.Service
                                where p.IdPieza == pendiente.IdPieza
                                select new { p.NroProducto, o.FechaCarga }
                               ).Single();
-                return long.Parse($"{tramite.NroProducto}{tramite.FechaCarga?.ToString("yyyy")}");
+                return new[] { long.Parse(tramite.NroProducto), long.Parse(tramite.FechaCarga?.ToString("yyyy")) };
             }
         }
+        /// <summary>
+        /// Update data on table AppDistribuidores_DatosAdicionalesTramitaciones
+        /// </summary>
+        /// <param name="IdPieza">IdPieza on table AppDistribuidores_Tramitaciones</param>
+        /// <param name="pendienteDato">Data for update</param>
+        /// <returns>True when update</returns>
         public bool UpdateDato(int IdPieza, PendienteDato pendienteDato)
         {
             using (var context = new Data.PakBackEndEntities())

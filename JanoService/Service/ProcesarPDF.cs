@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace JanoService.Service
 {
+    /// <summary>
+    /// Make PDF signed
+    /// </summary>
     public class ProcesarPDF
     {
         volatile internal string signedCoords;
@@ -15,7 +18,13 @@ namespace JanoService.Service
         volatile internal string pdfPath;
         volatile internal string pdfDestPath;
         volatile private object _lock = new object();
+        /// <summary>
+        /// This expression must match with data 6 on table AppDistribuidores_DatosAdicionalesTramitaciones
+        /// </summary>
         Regex coordsPattern = new Regex(@"(?:[\|]{0,1}(\d+)\:(\d+)\;(\d+)\;(\d+)\;(\d+))+");
+        /// <summary>
+        /// Simple safe thread. Be carefull this aproach doesn't much too safe.
+        /// </summary>
         internal void procesar()
         {
             lock (_lock)
@@ -39,6 +48,14 @@ namespace JanoService.Service
                 document.Close();
             }
         }
+        /// <summary>
+        /// Matematical relation between image size and max size would be used for signed
+        /// </summary>
+        /// <param name="height">Height of image</param>
+        /// <param name="width">Width of image</param>
+        /// <param name="maxW">Maximun width for signed</param>
+        /// <param name="maxH">Maximun heigth for signed</param>
+        /// <returns></returns>
         private float calcularAncho(int height, int width, int maxH, int maxW)
         {
             var relation = (float)maxH / maxW;
@@ -49,6 +66,15 @@ namespace JanoService.Service
             var result = width * scale;
             return result;
         }
+        /// <summary>
+        /// Signed
+        /// </summary>
+        /// <param name="document">PDF object</param>
+        /// <param name="pageIdx">Page number</param>
+        /// <param name="imgX">Left coordinate</param>
+        /// <param name="imgY">Bottom coordinate</param>
+        /// <param name="maxW">Maximun width for signed</param>
+        /// <param name="maxH">Maximun heigth for signed</param>
         void firmar(Document document, int pageIdx, int imgX, int imgY, int maxW, int maxH)
         {
             var image = new Image(ImageDataFactory.Create(signed));

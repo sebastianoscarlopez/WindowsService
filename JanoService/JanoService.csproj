@@ -209,6 +209,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Service\ApiJanoService.cs" />
     <Compile Include="Service\ArchivosThuban.cs" />
     <Compile Include="Service\ArchivoThuban.cs" />
     <Compile Include="Service\HttpForm.cs" />
@@ -219,7 +220,6 @@
     <Compile Include="Service\Process.cs" />
     <Compile Include="Service\TipoDato.cs" />
     <Compile Include="Service\TypeUpload.cs" />
-    <Compile Include="Service\UploadFiles.cs" />
     <Compile Include="Service\WinService.cs" />
   </ItemGroup>
   <ItemGroup>
